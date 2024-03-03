@@ -20,4 +20,4 @@ def register_blueprints(app):
     app.register_blueprint(student.student_bp)
     app.register_blueprint(faculty.faculty_bp)
     app.register_blueprint(stu_course.course_bp)
-    app.register_b
+    app.register_blueprint(uploads.uploads_bp)
