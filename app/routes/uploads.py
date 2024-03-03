@@ -19,6 +19,7 @@ def uploaded_file(filename):
     upload_folders = [Config.UPLOAD_FOLDERS[course][file_type] for course in Config.UPLOAD_FOLDERS for file_type in Config.UPLOAD_FOLDERS[course]]
     return ",\n".join(send_from_directory(folder, filename) for folder in upload_folders)
 
+
 @uploads_bp.route('/upload/<file_type>', methods=["POST"])
 def upload_file(file_type):
     if 'email' not in session:
@@ -79,7 +80,6 @@ def search_files():
         # Search files by filename
         files = File.query.filter(File.filename.like(f'%{search_filename}%')).all()
 
-
     else:
         # No search criteria provided
         files = []
@@ -102,7 +102,7 @@ def get_uploaded_files():
     user_files = File.query.filter_by(faculty_id=faculty.id).all()
     files = [{'filename': file.filename, 'day': file.day} for file in user_files]
     return jsonify(files)
-import os
+
 
 @uploads_bp.route('/deletefile', methods=['POST'])
 def delete_files():
