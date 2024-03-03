@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(to right, #8a2387, #e94057, #f27121);
+        }
+    </style>
+</head>
+<body class="p-8">
+
+<div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-8">
+    <h1 class="text-3xl font-bold mb-8 text-center text-gray-800">Faculty Dashboard</h1>
+    <h2>JAVA PAGE</h2>
+    
+    <div class="grid grid-cols-2 gap-4 mb-8">
+        <div>
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Upload Notes</h2>
+            <form action="/upload/notes" method="post" enctype="multipart/form-data" class="flex items-center space-x-4">
+                <input type="file" name="file" class="border border-gray-300 p-2 rounded-md">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md focus:outline-none">Upload</button>
+            </form>
+        </div>
+
+        <div>
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Upload Recordings</h2>
+            <form action="/upload/recordings" method="post" enctype="multipart/form-data" class="flex items-center space-x-4">
+                <input type="file" name="file" class="border border-gray-300 p-2 rounded-md">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md focus:outline-none">Upload</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 mb-8">
+        <div>
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Upload Assignments</h2>
+            <form action="/upload/assignments" method="post" enctype="multipart/form-data" class="flex items-center space-x-4">
+                <input type="file" name="file" class="border border-gray-300 p-2 rounded-md">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md focus:outline-none">Upload</button>
+            </form>
+        </div>
+
+        <div>
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Upload Assessments</h2>
+            <form action="/upload/assessments" method="post" enctype="multipart/form-data" class="flex items-center space-x-4">
+                <input type="file" name="file" class="border border-gray-300 p-2 rounded-md">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md focus:outline-none">Upload</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete File -->
+    <h2 class="text-2xl font-bold mb-4 text-gray-800">Delete File</h2>
+    <form action="/delete" method="post" class="mb-8 flex items-center space-x-4">
+        <input type="text" name="filename" placeholder="Enter filename to delete" class="border border-gray-300 p-2 rounded-md">
+        <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md focus:outline-none">Delete</button>
+    </form>
+</div>
+
+</body>
+</html>

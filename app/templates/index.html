@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>BEST IT ACADEMY</title>
+    <link rel="stylesheet"  href="static\css\first.css">
+    <link rel="icon" href="static\images\Picture3.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-qf97I+0o3+D7fK2VFcFhJjRpKP5jWfD5zNhm1Tjo+T8TziqUDG+ThQo2rhJlF+8u" crossorigin="anonymous">
+</head>
+<body>
+    <!--top-->
+    <div class="first bg-slate-900" id="home">
+        <div class="x cursor-pointer">
+            <div class="ml-20 flex flex-row rounded-full">
+                <div>
+                    <img src="\static\images\Picture2.png" class="h-16">
+                </div>
+                <ul class="flex flex-col text-xl pr-4">
+                    <b class="ml-2 text-2xl">B E S T</b>
+                    <b class="">IT Academy</b>
+                </ul> 
+            </div>
+        </div>
+        <div class="y cursor-pointer">
+            <div class="home">
+                <form method="post" action="/">
+                    <button type="submit" onclick="scrollToSection('home')">HOME</button>
+                </form>
+            </div> 
+            <div class="about">
+                <button onclick="scrollToSection('about')">ABOUT</button>
+            </div> 
+            <div class="COURSES">
+                <button onclick="scrollToSection('COURSES')">COURSES</button>
+            </div> 
+            <div class="contact">
+                <button onclick="scrollToSection('contact')">CONTACT</button>
+            </div>
+            <div class="main">
+                <form method="POST" action='/student_registration'>
+                    <button type="submit">REGISTRATION</button>
+                </form>
+                <form method="POST" action='/student_login'>
+                    <button type="submit">LOGIN</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--second box-->
+    <div class="bg-slate-800 h-16">
+    </div>
+    <div class="xy">
+        <div class="second-box bg-cover bg-no-repeat h-full" style="background-image:url('static/images/pexels-christina-morillo-1181317.jpg')">
+            <div class="one">
+                <dd class="flex flex-col text-4xl text-white">
+                    <p class="text-center font-bold">Welcome to BEST IT ACADEMY -</p>
+                    <p class="text-right text-white text-2xl mr-4 font-bold">Where Innovation Meets Expertise!</p>
+                </dd>
+                <span class="mt-48">
+                    <div class="get">
+                        <form method="POST" action='/student_registration'>
+                            <button type="submit" class="w-48 h-16">
+                                Get Started
+                            </button>
+                        </form>
+                    </div>
+                    <div class="buttons">
+                        <form method="POST">
+                            <button type="submit" formaction="/pics">
+                                <p class="mr-8"><b>&#9656;</b></p>
+                                <ul class="text-Whitefield.jpg"><b>photos and Videos</b></ul>
+                            </button>
+                        </form>
+                    </div>
+                </span>
+            </div>
+        </div>
+    </div>
+    <!--third box-->
+    <div id="COURSES" class="pl-12 py-10 grid bg-black" >
+        <div>
+            <h1 class="text-4xl font-bold mb-10 text-center text-white">Courses</h1>
+        </div>
+        <div class="container mx-auto py-8">
+            <div class="grid grid-cols-3 gap-8 place-items-center">
+                <div class="flex flex-col gap-4 w-80">
+                    <div class="overflow-hidden rounded-full place-items-center flex flex-col">
+                        <img src="static\images\Picture4 (2).png" alt="Python Course Image" class="h-64 object-cover mb-2">
+                        <a class="px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg" href="/python_info">PYTHON</a>
+                    </div>
+                    <div class="border-t-2 h-16  flex justify-center">
+                        <p class="p-4 text-gray-700"><i class="fas fa-clock"></i> 2 months</p>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-4 w-80">
+                    <div class="overflow-hidden rounded-full  place-items-center flex flex-col">
+                        <img src="https://c7.alamy.com/comp/T48W60/java-programming-concept-virtual-machine-on-server-room-background-T48W60.jpg" alt="Java Course Image" class="h-64 object-cover mb-2">
+                        <a class="px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg" href="/java_info">JAVA</a>
+                    </div>
+                    <div class="border-t-2 h-16 inline flex justify-center">
+                        <p class="p-4 text-gray-700"><i class="fas fa-clock"></i> 2 months</p>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-4 w-80">
+                    <div class="overflow-hidden rounded-full  place-items-center flex flex-col">
+                        <img src="https://profoundedutech.com/blog/wp-content/uploads/2019/12/No-3.png" alt="Testing Tools Image" class="h-64 object-cover mb-2">
+                        <button class="px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg">TESTING TOOLS</button>
+                    </div>
+                    <div class="border-t-2 h-16 flex justify-center">
+                        <p class="p-4 text-gray-700"><i class="fas fa-clock"></i> 2 months</p>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-4 w-80">
+                    <div class="overflow-hidden rounded-full  place-items-center flex flex-col">
+                        <img src="https://img.freepik.com/free-photo/digital-marketing-with-icons-business-people_53876-94833.jpg?size=626&ext=jpg" alt="Digital marketing image" class="h-64 object-cover mb-2">
+                        <button class="px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg">Digital Marketing</button>
+                    </div>
+                    <div class="border-t-2 h-16 flex justify-center">
+                        <p class="p-4 text-gray-700"><i class="fas fa-clock"></i> 2 months</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--forth box-->
+    <div class=" py-20  text-center text-slate-600 grid grid-cols-2 bg-black">
+        <div id="about" class="py-20 w-full">
+            <div class="grid grid-cols-1 justify-center flex place-items-center gap-10">
+                <div>
+                    <h1 class="text-5xl font-bold  mb-16 mr-24">ABOUT US</h1>
+                </div>
+                <div class="h-56 rounded-lg grid grid-cols-2 w-96">
+                    <div class="h-56 w-56">
+                        <img class="h-56 w-56 rounded-md" src="static\images\IMG_9275.JPG">
+                    </div> 
+                    <div class="flex flex-col justify-center place-items-center">
+                        <h1 class="text-slate-600 hover:text-red-600 hover:text-4xl">Rakesh</h1>
+                        <ul>MSC</ul>
+                        <ul>MD</ul>
+                    </div>
+                </div>
+                <div class="h-56 rounded-lg grid grid-cols-2 w-96">
+                    <div class="h-56 w-56">
+                        <img class="h-56 w-56 rounded-md" src="static\images\IMG_9275.JPG">
+                    </div>
+                    <div class="flex flex-col justify-center place-items-center">
+                        <p class="text-slate-600 hover:text-red-600 hover:text-4xl">Rakesh</p>
+                        <p>MSC</p>
+                        <p>MD</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 gap-10 justify-center items-center flex mt-20 mr-4">
+            <div>
+            <h1 class="text-3xl font-bold text-center mb-8"><u>What Our Organization Offers:</u></h1>
+            </div>
+            <div class="grid grid-cols-2 gap-10">
+                <div class="flex flex-col">
+                    <div>
+                        <h1 class="text-2xl font-bold">Technical Training:</h1>
+                    </div>
+                    <div>
+                        <ol class="list-decimal list-inside pl-5">
+                            <li>Courses in programming languages (e.g., Python, Java, etc.).</li>
+                            <li>Software development methodologies and best practices.</li>
+                            <li>Database management and administration.</li>
+                        </ol> 
+                    </div>                               
+                </div>
+                <div class="">
+                    <div class="" >
+                        <h1 class="text-2xl font-bold">Soft Skills Development:</h1>
+                    </div>
+                    <div class="">
+                        <ol class="list-decimal list-inside pl-5">
+                            <li>Communication and presentation skills.</li>
+                            <li>Team collaboration and leadership.</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="">
+                    <h1 class="text-2xl font-bold">IT Infrastructure Services:</h1>
+                    <ol class="list-decimal list-inside pl-5">
+                        <li>Training on networking concepts.</li>
+                        <li>Cloud computing services (e.g., AWS, Azure).</li>
+                        <li>System administration and maintenance.</li>
+                    </ol>
+                </div>
+                <div class="">
+                    <h1 class="text-2xl font-bold">Certification Programs:</h1>
+                    <ol class="list-decimal list-inside pl-5">
+                        <li>Offer recognized certifications in relevant technologies.</li>
+                        <li>Preparation for industry-recognized certifications.</li>
+                    </ol>
+                </div>
+                <div class="">
+                    <h1 class="text-2xl font-bold">Quality Assurance and Testing:</h1>
+                    <ol class="list-decimal list-inside pl-5">
+                        <li>Training in software testing and quality assurance.</li>
+                        <li>Test automation techniques.</li>
+                    </ol>
+                </div>
+                <div class="">
+                    <h1 class="text-2xl font-bold">Internship and Placement Assistance:</h1>
+                    <ol class="list-decimal list-inside pl-5">
+                        <li>Assistance in finding internships.</li>
+                        <li>Placement support for job opportunities.</li>
+                    </ol>
+                </div>
+                <div class="">
+                    <h1 class="text-2xl font-bold">DevOps Practices:</h1>
+                    <ol class="list-decimal list-inside pl-5">
+                        <li>Training in DevOps methodologies.</li>
+                        <li>Continuous integration and deployment.</li>
+                    </ol>
+                </div>
+                <div class="">
+                    <h1 class="text-2xl font-bold">Mock Interviews and Career Counseling:</h1>
+                    <ol class="list-decimal list-inside pl-5">
+                        <li>Conduct mock interviews to prepare students for real-world scenarios.</li>
+                        <li>Career counseling sessions.</li>
+                    </ol>
+                </div>
+                <div class="">
+                    <h1 class="text-2xl font-bold">Digital Marketing:</h1>
+                    <ol class="list-decimal list-inside pl-5">
+                        <li>Courses on digital marketing strategies.</li>
+                        <li>Social media marketing.</li>
+                        <li>Search engine optimization (SEO).</li>
+                    </ol>
+                </div>
+                <div class="">
+                    <h1 class="text-2xl font-bold">Facility Access:</h1>
+                    <ol class="list-decimal list-inside pl-5">
+                        <li>Provide access to labs with necessary equipment.</li>
+                        <li>Offer a conducive learning environment with Wi-Fi access.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--bottom-->
+    <div id="contact" class="bg-neutral-900 h-64 scroll-m-0 grid grid-cols-3 fixed-bottom">
+        <div class=" text-xl flex flex-col gap-2 pt-8 ml-20 text-slate-400"> 
+            <div class="flex flex-row rounded-full w-48">
+                <div>
+                    <img src="\static\images\Picture2.png" class="h-16">
+                </div>
+                <ul class="flex flex-col text-xl">
+                    <b class="ml-2 text-2xl">B E S T</b>
+                    <b class="">IT Academy</b>
+                </ul> 
+            </div>
+            <h1 class="ml-4">Follow us</h1>
+            <a class="ml-4" href="https://www.facebook.com/Bestitacademy" target="_blank">
+                <i class="fab fa-facebook-square"></i> Facebook
+            </a>
+            <a class="instagaram ml-4" href="https://www.instagram.com/bestitacademy/">
+                <i class="fab fa-instagram" >instagram</i>
+            </a>
+            <a class="twitter ml-4" href="https://twitter.com/i/flow/login?redirect_after_login=%2FBestitacademy">
+                <i class="fab fa-twitter">twitter</i>
+            </a>
+        </div>
+        <div class="text-slate-400 mr-28 mt-10">
+            <p>We provide best <b>Corporate</b> level trainings which is 
+                first of its kind in Hyderabad,
+                both class room and online with <b>100% placement</b> assistance.
+                All our instructors are experts and highly experienced.
+            </p>
+        </div>
+        <div class="flex flex-col gap-4 mt-8 mr-4 text-slate-300">
+            <h1>contact us</h1>
+            <a class="googlemaps" href="https://maps.app.goo.gl/9V9FmPG2jkqQrEWX9">
+                <i class="fas fa-map-marker-alt"></i>4th Floor, Mithai Wala Building, opp. Metro Pillar Number 1595, Kothapet, Hyderabad, Telangana - 500035
+            </a>
+            <p class="flex">mobile: 
+                <a href="tel:+919989650756" class="ml-4 mr-4">
+                    <i class="fas fa-phone"></i><u>+91-9989650756</u>
+                </a>
+                <a href="tel:+919908980756">
+                    <i class="fas fa-phone"></i><u>+91-9908980756</u>
+                </a>
+            </p>
+            <a href="mailto:info@bestitacademy.com">
+                <i class="fas fa-envelope"></i><u>mail to:info@bestitacademy.com</u>
+            </a>
+        </div>    
+    </div>
+    <script>
+        function scrollToSection(sectionId) {
+            var section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>     
+</body>
+</html>

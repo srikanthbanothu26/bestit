@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+ 
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-black fixed text-white font-sans bg-cover bg-no-repeat" style="background-image:url('static/images/pexels-fox-1595385.jpg')">
+    <div class="flex justify-between items-center mx-4 my-8">
+        <form method="post">
+            <div class="left-box bg-transparent rounded-lg shadow-md p-6">
+                <div class="flex flex-row rounded-full w-48">
+                    <div>
+                        <img src="\static\images\Picture2.png" class="h-16">
+                    </div>
+                    <ul class="flex flex-col text-xl">
+                        <b class="ml-2 text-2xl">B E S T</b>
+                        <b class="">IT Academy</b>
+                    </ul> 
+                </div>
+                {% if user_course %}
+                <h2 class="text-4xl mb-4 text-green-800">Welcome to {{ user_course.capitalize() }} Course</h2>
+                <a href="/{{user_course}}_course" class="text-2xl bg-green-600 rounded-md p-1 m-2">tap here to go to dashboard</a>
+                {% if user_course.lower() == "python" %}
+                <ol class="mt-4 text-rose-800 list-decimal font-semibold">
+                    <li>Python is a versatile, high-level programming language known for its simplicity, readability, and flexibility.</li>
+                    <li>It offers a wide range of features and capabilities that make it suitable for various applications, from web development and data analysis to artificial intelligence and scientific computing.</li>
+                    <li>Python's elegant syntax and dynamic typing make it easy to learn and use, especially for beginners, while its extensive standard library and active community support provide developers with powerful tools and resources to tackle complex problems efficiently.</li>
+                    <li>One of Python's key strengths lies in its broad range of applications.</li>
+                    <li>It serves as a scripting language for automating tasks, a rapid prototyping tool for software development, and a robust framework for building scalable web applications.</li>
+                    <li>Additionally, Python's ecosystem includes numerous libraries and frameworks tailored to specific domains, such as Django and Flask for web development, NumPy and Pandas for data manipulation, and TensorFlow and PyTorch for machine learning and deep learning.</li>
+                    <li>Its cross-platform compatibility and seamless integration with other programming languages further enhance its appeal, making Python a popular choice for developers across industries and skill levels.</li>
+                </ol>
+                {% elif user_course.lower() == "java" %}
+                <ol class="mt-4 text-rose-800 list-decimal font-semibold">
+                    <li>Java is a high-level, object-oriented programming language known for its versatility, portability, and robustness.</li>
+                    <li>Developed by Sun Microsystems (now owned by Oracle Corporation), Java is designed to be platform-independent, meaning that Java programs can run on any device or operating system with a Java Virtual Machine (JVM).</li>
+                    <li>This is made possible by compiling Java code into bytecode, which is then executed by the JVM.</li>
+                    <li>Java's object-oriented nature allows developers to create modular, reusable code by organizing functionality into classes and objects.</li>
+                    <li>It supports features like inheritance, polymorphism, encapsulation, and abstraction, enabling developers to build complex applications efficiently.</li>
+                    <li>Java is widely used in various domains, including web development, enterprise applications, mobile app development (Android), scientific computing, and more.</li>
+                    <li>Its extensive standard library provides predefined classes and methods for common tasks, making it easier for developers to build applications quickly. Additionally, Java's strong community support, extensive documentation, and plethora of third-party libraries and frameworks contribute to its popularity and ease of development.</li>
+                    <li>With its emphasis on simplicity, reliability, and scalability, Java remains one of the most widely adopted programming languages worldwide, powering countless software systems and applications.</li>
+                </ol>
+                {% endif %}
+                {% else %}
+                    <p>No course selected. Please choose a course to explore.</p>
+                {% endif %}
+            </div>
+       </form>
+        <div class="right-box rounded-lg shadow-md p-6 ml-4">
+            <form method="post" action="/">
+                <button type="submit" class="bg-red-500  px-4 py-2 rounded-md">LOGOUT</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

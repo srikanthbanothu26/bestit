@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Course</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gray-100 font-sans bg-custom ">
+    <div class="bg-green-800 text-white grid grid-cols-3 p-4 w-full h-24">
+        <div class="flex flex-row">
+            <div>
+                <img src="\static\images\Picture2.png" class="h-16 rounded-full">
+            </div>
+            <ul class="flex flex-col text-xl ml-4">
+                <b class="text-2xl">B E S T</b>
+                <b class="">IT Academy</b>
+            </ul>
+        </div>
+        <div class="grid-cols-1 grid">
+            <!-- Course info -->
+            <p class="ml-4">Course: {{ course }}</p>
+            <form method="post" action="/">
+                <button type="submit" class="border border-white py-1 px-3 rounded">LOGOUT</button>
+            </form>
+        </div>
+        <div class="rounded-lg text-lg">
+            <button id="edit-profile-btn" class="ml-2 px-3 py-1 bg-blue-500 text-white rounded h-6 w-14">Edit</button>
+            <input type="file" id="file-upload" accept="image/*" style="display: none;">
+            <button id="upload-btn" style="display: none;">Upload</button>
+            <div class="profile-image-container">
+                {% if current_user.profile_image %}
+                <img id="profile-image" src="{{ url_for('static', filename='profile_pics/' + current_user.profile_image) }}" class="h-16 w-16 rounded-full" alt="{{ current_user.username }}'s Profile Image" onerror="this.onerror=null;this.src='{{ url_for('static', filename='profile_pics/1.png') }}';" />
+                {% else %}
+                <img id="profile-image" src="{{ url_for('static', filename='profile_pics/default.png') }}" class="h-16 w-16 rounded-full" alt="Default Profile Image">
+                {% endif %}
+            </div>
+        </div>
+    </div>    
+    <div class="container  mt-16 flex">  
+        <div class="w-1/5 bg-gray-800 text-green-500 p-6"> 
+            <div class="my-4">
+                <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full" onclick="scrollToSection('Circulam')">CIRCULAM</button> 
+            </div>
+            <div class="my-4">
+                <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full" onclick="scrollToSection('placements')">PLACEMENTS</button>      
+            </div>
+            <div class="my-4">
+                <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full" onclick="scrollToSection('notes')">NOTES</button>
+            </div>
+            <div class="my-4">
+                <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full" onclick="scrollToSection('recordings')">RECORDINGS</button>
+               
+            </div>
+            <div class="my-4">
+                <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full" onclick="scrollToSection('assignments')">ASSIGNMENTS</button>
+             
+            </div>
+            <div class="my-4">
+                <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full" onclick="scrollToSection('assessments')">ASSESSMENTS</button>
+              
+            </div>
+           
+           
+        </div>
+
+       
+        <div class="w-3/4 px-6 mt-10 grid grid-cols-1 gap-20 ml-16">
+
+
+            <div class="bg-indigo-600 text-white p-6 rounded-lg mb-6 h-96 pl-16 overflow-y-scroll" id="circulam">
+              
+                <h1 class="text-2xl font-bold mb-4">CIRCULAM</h1>
+               <h2> Python Full-Stack</h2>
+               <ul> Python Fundamentals</ul>
+                
+                <li> Introduction to Python programming</li>
+                <li>  Data types, variables, and operators</li>
+                <li>  Control structures: loops and conditionals</li>
+                <li> Functions and modules</li>
+                <li> Object-oriented programming (OOP) concepts</li>
+
+                <ul> Web Development Basics</ul>
+
+                <li> Introduction to web development</li>
+                <li> HTTP protocol and client-server architecture</li>
+                <li> HTML fundamentals and tags</li>
+                <li>  Cascading Style Sheets (CSS) for styling web pages</li>
+                <li>  JavaScript basics: variables, functions, DOM manipulation, and events</li>
+
+                <ul> Flask Framework</ul>
+                
+                <li>   Introduction to Flask framework</li>
+                <li> Routing: handling URL paths and HTTP methods</li>
+                <li>  Templates: rendering dynamic web pages</li>
+                <li> Forms handling and validation</li>
+                <li>Database integration with Flask-SQLAlchemy</li>
+                <li>   User authentication and authorization</li>
+
+                <ul> Django Framework</ul>
+                
+                <li> Introduction to Django framework</li>
+                <li>   Models: defining database schemas with Django ORM</li>
+                <li> Views: handling requests and rendering responses</li>
+                <li> URL configuration and routing</li>
+                <li> Templates: building dynamic web pages</li>
+                <li> Forms handling and validation</li>
+
+                <ul>  Front-End Development</ul>
+
+                <li> Front-end technologies: HTML, CSS, and JavaScript</li>
+                <li>  Front-end frameworks: React, Angular, or Node.js</li>
+                <li>  Building interactive and responsive user interfaces</li>
+                <li>  Handling data binding, components, and routing</li>
+                <ul>  Database Integration</ul>
+                <li>  Relational databases (SQL & MySQL)</li>
+                <li>  NoSQL Database (MongoDB)</li>
+                <li>   Object-Relational Mapping (ORM) libraries</li>
+                <li>  Querying databases using Python</li>
+                <li>  Database migrations and management</li>
+
+                <ul>  RESTful APIs</ul>
+
+                <li>  Building RESTful APIs with Flask or Django REST Framework</li>
+                <li>  API design principles and best practices</li>
+                <li>  Consuming and integrating with external APIs</li>
+
+                <ul>  Deployment and DevOps</ul>
+
+                <li> Containerization with Docker</li>
+                 <li>  Cloud deployment platforms (AWS, Azure)</li>
+                <li>  Version control systems (Git)</li>
+                <li> Continuous integration and deployment (CI/CD) concepts</li>
+
+                <ul> Testing and Debugging</ul>
+
+                <li>  Unit testing frameworks</li>
+                <li>  Debugging and error handling techniques</li>
+                <li>  Test-driven development (TDD) principles</li>
+
+                <ul>  Security and Authentication</ul>
+
+                <li>  Authentication and authorization concepts</li>
+                <li>  Secure coding practices</li>
+                <li>  Handling common security threats in web applications</li>
+
+                <ul>  Project Work</ul>
+
+                <li>  Hands-on projects to apply knowledge and skills</li>
+                <li>  Building a full-stack web application using Python and related technologies</li>
+                <li>  Working with a team and following best practices</li>
+                
+            </div>
+            
+            <div class="bg-gray-200 text-gray-800 p-6 rounded-lg mb-6 text-center" id="placements">
+          
+                <h1 class="text-2xl font-bold mb-4 ">PLACEMENT ANNOUNCEMENTS</h1>
+              
+                <ol class="announcements-list overflow-y-scroll h-96">
+                    <li class="announcement mb-4">
+                        <p class="announcement-date font-bold text-gray-600">January 15, 2024</p>
+                        <h2>Announcement Title 1</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod lacus ligula.</p>
+                    </li>
+                    <p class="announcement-date font-bold text-gray-600">February 2, 2024</p>
+                        <h2>Announcement Title 2</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod lacus ligula.</p>
+                    </li>
+                    <li class="announcement mb-4">
+                        <p class="announcement-date font-bold text-gray-600">March 10, 2024</p>
+                        <h2>Announcement Title 3</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod lacus ligula.</p>
+                    </li>
+                    <li class="announcement mb-4">
+                        <p class="announcement-date font-bold text-gray-600">April 1, 2024</p>
+                        <h2>Announcement Title 4</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod lacus ligula.</p>
+                    </li>
+                    <li class="announcement mb-4">
+                        <p class="announcement-date font-bold text-gray-600">May 5, 2024</p>
+                        <h2>Announcement Title 5</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod lacus ligula.</p>
+                    </li>
+
+                </ol>
+            </div>
+
+           
+            <div class="bg-blue-800 text-white p-6 rounded-lg mb-6 overflow-y-scroll h-96 text-center" id="notes">              
+                <h1 class="text-2xl font-bold mb-4">NOTES</h1>
+                <ul>
+                    {% for file in file_notes %}
+                        <li><a href="{{ url_for('uploads.uploaded_file', filename=file) }}">{{ file }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <div class="bg-sky-800 text-white p-6 rounded-lg mb-6 overflow-y-scroll h-96 text-center" id="recordings">              
+                <h1 class="text-2xl font-bold mb-4">RECORDINGS</h1>
+                <ul>
+                    {% for file in file_recordings %}
+                        <li><a href="{{ url_for('uploads.uploaded_file', filename=file) }}">{{ file }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <div class="bg-cyan-800 text-white p-6 rounded-lg mb-6 overflow-y-scroll h-96 text-center" id="assignments">              
+                <h1 class="text-2xl font-bold mb-4">ASSIGNMENTS</h1>
+                <ul>
+                    {% for file in file_assignments %}
+                        <li><a href="{{ url_for('uploads.uploaded_file', filename=file) }}">{{ file }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <div class="bg-teal-800 text-white p-6 rounded-lg mb-6 overflow-y-scroll h-96 text-center" id="assessments">              
+                <h1 class="text-2xl font-bold mb-4">ASSESSMENTS</h1>
+                <ul>
+                    {% for file in file_assessments %}
+                        <li><a href="{{ url_for('uploads.uploaded_file', filename=file) }}">{{ file }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>            
+        </div>
+    </div>
+        
+    
+    <script>
+    document.getElementById('upload-btn').addEventListener('click', function() {
+        var fileInput = document.getElementById('file-upload');
+        var file = fileInput.files[0];
+        if (file) {
+            var formData = new FormData();
+            formData.append('profile_image', file);
+            
+            fetch('/upload_profile_image', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Network response was not ok.');
+            })
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('profile-image').src = data.profile_image_url;
+                    alert('Profile image uploaded successfully.');
+                } else {
+                    alert('Failed to upload profile image.');
+                }
+            })
+            .catch(error => {
+                console.error('There was an error with the fetch operation:', error);
+            });
+        } else {
+            alert('No file selected.');
+        }
+    });
+    </script>
+    
+    <script>
+        function scrollToSection(sectionId) {
+            var section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const editBtn = document.getElementById('edit-profile-btn');
+            const fileUpload = document.getElementById('file-upload');
+            const uploadBtn = document.getElementById('upload-btn');
+    
+            editBtn.addEventListener('click', function() {
+                fileUpload.style.display = 'block';
+                uploadBtn.style.display = 'block';
+            });
+        });
+    </script>
+
+</body>
+</html>

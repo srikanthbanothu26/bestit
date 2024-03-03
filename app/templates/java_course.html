@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>java Course</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gray-100 font-sans bg-custom ">
+
+    <div class="bg-green-800 text-white py-4 px-6 flex justify-between items-center fixed top-0 w-full z-50">
+        <div class="flex flex-row rounded-full w-48">
+            <div>
+                <img src="\static\images\Picture2.png" class="h-16">
+            </div>
+            <ul class="flex flex-col text-xl">
+                <b class="ml-2 text-2xl">B E S T</b>
+                <b class="">IT Academy</b>
+            </ul> 
+        </div>
+      
+        <button class="border border-white rounded-lg inline-flex items-center text-lg px-3 py-1">
+            <!-- Circular user image -->
+            <img src="static/images/IMG_9275.JPG" alt="User Image" class="h-6 w-6 rounded-full mr-2">
+            <!-- User profile info -->
+            <span>{{ username }}</span>
+        </button>
+        
+        <!-- Course info -->
+        <p class="ml-4">Course: {{ course }}</p>
+   
+        <form method="post" action="/">
+            <!-- Logout button -->
+            <button type="submit" class="ml-4 bg-transparent border border-white py-1 px-3 rounded">LOGOUT</button>
+        </form>
+    </div>
+
+  
+    <div class="container  mt-16 flex">
+        
+        <div class="w-1/5 bg-gray-800 text-green-500 p-6">
+           
+            <div class="my-4">
+                <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full" onclick="scrollToSection('Circulam')">CIRCULAM</button>
+                
+            </div>
+            <div class="my-4">
+                <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full" onclick="scrollToSection('placements')">PLACEMENTS</button>
+                
+            </div>
+            <div class="my-4">
+                <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full" onclick="scrollToSection('notes')">NOTES</button>
+                
+            </div>
+            <div class="my-4">
+                <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full" onclick="scrollToSection('recordings')">RECORDINGS</button>
+               
+            </div>
+            <div class="my-4">
+                <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full" onclick="scrollToSection('assignments')">ASSIGNMENTS</button>
+             
+            </div>
+            <div class="my-4">
+                <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full w-full" onclick="scrollToSection('assessments')">ASSESSMENTS</button>
+              
+            </div>
+           
+           
+        </div>
+
+       
+        <div class="w-3/4 px-6 mt-10 grid grid-cols-1 gap-20 ml-16">
+
+
+            <div class="bg-indigo-600 text-white p-6 rounded-lg mb-6 h-96 pl-16 overflow-y-scroll" id="circulam">
+              
+                <h1 class="text-2xl font-bold mb-4">CIRCULAM</h1>
+               <h2> Java Full-Stack</h2>
+               <ul> Introduction to Java</ul>
+            
+                <li>  Data types, variables, and operators</li>
+                <li>  Control structures: loops and conditionals</li>
+                <li> Object-oriented programming (OOP) concepts: classes, objects, inheritance, polymorphism, and encapsulation</li>
+                <li> Exception handling</li>
+                <li> File I/O</li>
+
+                <ul> Web Development Basics</ul>
+
+                <li> Introduction to web development</li>
+                <li> HTTP protocol and client-server architecture</li>
+                <li> HTML fundamentals and tags</li>
+                <li>  Cascading Style Sheets (CSS) for styling web pages</li>
+                <li>  JavaScript basics: variables, functions, DOM manipulation, and events</li>
+
+                <ul> HTML, CSS, JavaScript, jQuery & Bootstrap</ul>
+                
+                <li>  Introduction to web development</li>
+                <li>HTML fundamentals and tags</li>
+                <li> Cascading Style Sheets (CSS) for styling web pages</li>
+                <li> Forms handling and validation</li>
+               
+
+                <ul>Java Enterprise Edition (Java EE)</ul>
+                
+                <li> Introduction to Java EE</li>
+                <li> Servlets: handling HTTP requests and responses</li>
+                <li> JavaServer Pages (JSP): dynamic web page generation</li>
+                <li>JavaServer Faces (JSF): web application framework</li>
+                <li>Enterprise JavaBeans (EJB): components for business logic</li>
+                <li>Java Persistence API (JPA): database access using ORM</li>
+
+                <ul> Spring Framework</ul>
+
+                <li>Introduction to Spring Framework</li>
+                <li> Spring Core: dependency injection and inversion of control</li>
+                <li> Spring MVC: building web applications</li>
+                <li> Spring Security: authentication and authorization</li>
+                <ul>Spring Boot: rapid application development and deployment</ul>
+               
+
+                <ul>  Front-End Frameworks</ul>
+
+                <li> Introduction to front-end frameworks (Angular/React/Node)</li>
+                <li>  Building interactive user interfaces</li>
+                <li>  Handling data binding, components, and routing</li>
+
+                <ul>Web Services and Spring Boot with Micro Services</ul>
+
+                <li>Representational State Transfer (REST) principles</li>
+                 <li> Building RESTful APIs using JAX-RS or Spring Web Services</li>
+                <li> Consuming RESTful APIs</li>
+                
+
+                <ul>Databases and ORMs</ul>
+
+                <li>Introduction to databases and SQL</li>
+                <li>Relational databases ( SQL and MySQL)</li>
+                <li>NoSQL Databases (MONGOO DB)</li>
+                <li>Object-Relational Mapping (ORM) frameworks (eHibernate and JPA)</li>
+                <li>Querying databases using Java</li>
+
+                <ul>  Deployment and DevOps</ul>
+
+                <li> Application servers (Apache Tomcat, JBoss)</li>
+                <li> Version control systems (Git)</li>
+                <li> Build tools (Maven, Gradle)</li>
+                <li>Continuous integration and deployment (CI/CD) concepts</li>
+
+                <ul>  Project Work</ul>
+
+                <li>  Hands-on projects to apply knowledge and skills</li>
+                <li>  Building a full-stack web application using Python and related technologies</li>
+                <li>  Working with a team and following best practices</li>
+                
+            </div>
+            
+            <div class="bg-gray-200 text-gray-800 p-6 rounded-lg mb-6 text-center" id="placements">
+          
+                <h1 class="text-2xl font-bold mb-4 ">PLACEMENT ANNOUNCEMENTS</h1>
+              
+                <ol class="announcements-list overflow-y-scroll h-96">
+                    <li class="announcement mb-4">
+                        <p class="announcement-date font-bold text-gray-600">January 15, 2024</p>
+                        <h2>Announcement Title 1</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod lacus ligula.</p>
+                    </li>
+                    <p class="announcement-date font-bold text-gray-600">February 2, 2024</p>
+                        <h2>Announcement Title 2</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod lacus ligula.</p>
+                    </li>
+                    <li class="announcement mb-4">
+                        <p class="announcement-date font-bold text-gray-600">March 10, 2024</p>
+                        <h2>Announcement Title 3</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod lacus ligula.</p>
+                    </li>
+                    <li class="announcement mb-4">
+                        <p class="announcement-date font-bold text-gray-600">April 1, 2024</p>
+                        <h2>Announcement Title 4</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod lacus ligula.</p>
+                    </li>
+                    <li class="announcement mb-4">
+                        <p class="announcement-date font-bold text-gray-600">May 5, 2024</p>
+                        <h2>Announcement Title 5</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod lacus ligula.</p>
+                    </li>
+
+                </ol>
+            </div>
+
+           
+            <div class="bg-blue-800 text-white p-6 rounded-lg mb-6 overflow-y-scroll h-96 text-center" id="notes">
+              
+                <h1 class="text-2xl font-bold mb-4">NOTES</h1>
+                <ul>
+                    {% for file in file_java1 %}
+                        <li><a href="/uploads/notes/java/{{ file }}">{{ file }}</a></li>
+                    {% endfor %}
+                </ul>
+               
+            </div>
+
+            <div class="bg-sky-800 text-white p-6 rounded-lg mb-6 overflow-y-scroll h-96 text-center" id="recordings">
+              
+                <h1 class="text-2xl font-bold mb-4">RECORDINGS</h1>
+               
+                <ol id="notes-list" class="list-decimal">
+                  
+                    <ul>
+                        {% for file in file_java2 %}
+                            <li><a href="/uploads/recordings/java/{{ file }}">{{ file }}</a></li>
+                        {% endfor %}
+                    </ul>
+                   
+                </ol>
+            </div>
+
+            <div class="bg-blue-800 text-white p-6 rounded-lg mb-6 overflow-y-scroll h-96 text-center" id="assignments">
+                <h1 class="text-2xl font-bold mb-4">ASSIGNMENTS</h1>
+                <ol id="notes-list" class="list-decimal">
+                    <ul>
+                        {% for file in file_java3 %}
+                            <li><a href="/uploads/assignments/java/{{ file }}">{{ file }}</a></li> <!-- Corrected the URL -->
+                        {% endfor %}
+                    </ul>
+                </ol>
+            </div> 
+            <div class="bg-teal-800 text-white p-6 rounded-lg mb-6 overflow-y-scroll h-96 text-center" id="assessments">
+                <h1 class="text-2xl font-bold mb-4">ASSESSMENTS</h1>
+                <ol id="notes-list" class="list-decimal">
+                    <ul>
+                        {% for file in file_java4 %}
+                            <li><a href="/uploads/assessments/java/{{ file }}">{{ file }}</a></li> <!-- Corrected the URL -->
+                        {% endfor %}
+                    </ul>
+                </ol>
+            </div>
+            
+        </div>
+    </div>
+   
+    <script>
+        function scrollToSection(sectionId) {
+            var section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+  
+</body>
+
+</html>
