@@ -5,6 +5,7 @@ from flask_wtf.csrf import generate_csrf
 from flask_login import login_required
 
 course_bp = Blueprint("course", __name__)
+
 @course_bp.route("/python_course", methods=["GET", "POST"])
 def python_course():
     csrf_token = generate_csrf()
@@ -60,6 +61,69 @@ def java_course():
     return render_template("java_course.html", username=username, course=course, 
                            file_notes=file_notes, file_recordings=file_recordings, 
                            file_assignments=file_assignments, file_assessments=file_assessments, csrf_token=csrf_token)
+    
+    
+
+
+@course_bp.route("/digitalmarketing_course", methods=["GET", "POST"])
+def DM_course():
+    csrf_token = generate_csrf()
+    if 'username' not in session:
+        flash("Please log in first.")
+        return redirect('/student_login')
+    
+    username = session.get('username')
+    course = session.get('course')
+    
+    # Retrieve upload folder paths from the Flask application configuration
+    upload_folders = current_app.config.get('UPLOAD_FOLDERS', {}).get('digitalmarketing', {})
+    
+    # Ensure that all upload folders exist; if not, create them
+    for folder_name, folder_path in upload_folders.items():
+        if not os.path.exists(folder_path):
+            os.makedirs(folder_path)
+    
+    # Get the list of files in each upload folder
+    file_notes = os.listdir(upload_folders.get('notes', ''))
+    file_recordings = os.listdir(upload_folders.get('recordings', ''))
+    file_assignments = os.listdir(upload_folders.get('assignments', ''))
+    file_assessments = os.listdir(upload_folders.get('assessments', ''))
+    
+    return render_template("DM_course.html", username=username, course=course, 
+                           file_notes=file_notes, file_recordings=file_recordings, 
+                           file_assignments=file_assignments, file_assessments=file_assessments, csrf_token=csrf_token)
+    
+    
+    
+    
+@course_bp.route("/testingtools_course", methods=["GET", "POST"])
+def TT_course():
+    csrf_token = generate_csrf()
+    if 'username' not in session:
+        flash("Please log in first.")
+        return redirect('/student_login')
+    
+    username = session.get('username')
+    course = session.get('course')
+    
+    # Retrieve upload folder paths from the Flask application configuration
+    upload_folders = current_app.config.get('UPLOAD_FOLDERS', {}).get('testingtools', {})
+    
+    # Ensure that all upload folders exist; if not, create them
+    for folder_name, folder_path in upload_folders.items():
+        if not os.path.exists(folder_path):
+            os.makedirs(folder_path)
+    
+    # Get the list of files in each upload folder
+    file_notes = os.listdir(upload_folders.get('notes', ''))
+    file_recordings = os.listdir(upload_folders.get('recordings', ''))
+    file_assignments = os.listdir(upload_folders.get('assignments', ''))
+    file_assessments = os.listdir(upload_folders.get('assessments', ''))
+    
+    return render_template("TT_course.html", username=username, course=course, 
+                           file_notes=file_notes, file_recordings=file_recordings, 
+                           file_assignments=file_assignments, file_assessments=file_assessments, csrf_token=csrf_token)
+    
     
 """
 another process to download files from  directory 

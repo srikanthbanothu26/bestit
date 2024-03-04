@@ -81,7 +81,56 @@ def java_upload():
     # Check if the faculty information is found
     if faculty:
         # Pass the user information to the HTML template
-        return render_template("PYTHON.html", email=faculty.email, id=faculty.id, course=faculty.course)
+        return render_template("JAVA.html", email=faculty.email, id=faculty.id, course=faculty.course)
     else:
         # Handle the case where faculty information is not found
         return "Faculty information not found."
+    
+    
+ 
+@faculty_bp.route('/digitalmarketing_upload', methods=["GET", "POST"])
+def DM_upload():
+    if 'email' not in session:
+        return redirect('/faculty_login')
+    
+    # Fetch current user's email from the session
+    user_email = session['email']
+
+    # Query the database to get the faculty information based on the email
+    faculty = Faculty.query.filter_by(email=user_email).first()
+
+    # Check if the faculty information is found
+    if faculty:
+        # Pass the user information to the HTML template
+        return render_template("DigitalMarketing.html", email=faculty.email, id=faculty.id, course=faculty.course)
+    else:
+        # Handle the case where faculty information is not found
+        return "Faculty information not found."
+    
+    
+    
+@faculty_bp.route('/testingtools_upload', methods=["GET", "POST"])
+def TT_upload():
+    if 'email' not in session:
+        return redirect('/faculty_login')
+    
+    # Fetch current user's email from the session
+    user_email = session['email']
+
+    # Query the database to get the faculty information based on the email
+    faculty = Faculty.query.filter_by(email=user_email).first()
+
+    # Check if the faculty information is found
+    if faculty:
+        # Pass the user information to the HTML template
+        return render_template("TestingTools.html", email=faculty.email, id=faculty.id, course=faculty.course)
+    else:
+        # Handle the case where faculty information is not found
+        return "Faculty information not found."
+    
+    
+    
+    
+    
+    
+    

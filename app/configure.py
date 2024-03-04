@@ -15,6 +15,18 @@ class Config:
             'recordings': 'upload_java_recordings',
             'assignments': 'upload_java_assignments',
             'assessments': 'upload_java_assessments'
+        },
+        'digitalmarketing': {
+            'notes': 'upload_DigitalMarketing_notes',
+            'recordings': 'upload_digitalmarketing_recordings',
+            'assignments': 'upload_DigitalMarketing_assignments',
+            'assessments': 'upload_DigitalMarketing_assessments'
+        },
+        'testingtools': {
+            'notes': 'upload_testingtools_notes',
+            'recordings': 'upload_testingtools_recordings',
+            'assignments': 'upload_testingtools_assignments',
+            'assessments': 'upload_testingtools_assessments'
         }
     }
 
