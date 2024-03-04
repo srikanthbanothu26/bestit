@@ -38,3 +38,11 @@ def python_info():
 @main_bp.route('/java_info', methods=['GET','POST'])
 def java_info():
     return render_template('javainfo.html')
+
+@main_bp.route('/digitalmarketing_info', methods=['GET','POST'])
+def dm_info():
+    return render_template('dminfo.html')
+
+@main_bp.route('/testingtools_info', methods=['GET','POST'])
+def tt_info():
+    return render_template('ttinfo.html')
