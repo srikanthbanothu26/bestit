@@ -35,15 +35,21 @@ def python_course():
 
 @course_bp.route("/java_course", methods=["GET", "POST"])
 def java_course():
+    csrf_token = generate_csrf()
     if 'username' not in session:
         flash("Please log in first.")
         return redirect('/student_login')
     
     username = session.get('username')
-    course = get_user_course(username)
+    course = session.get('course')
     
     # Retrieve upload folder paths from the Flask application configuration
     upload_folders = current_app.config.get('UPLOAD_FOLDERS', {}).get('java', {})
+    
+    # Ensure that all upload folders exist; if not, create them
+    for folder_name, folder_path in upload_folders.items():
+        if not os.path.exists(folder_path):
+            os.makedirs(folder_path)
     
     # Get the list of files in each upload folder
     file_notes = os.listdir(upload_folders.get('notes', ''))
@@ -53,7 +59,7 @@ def java_course():
     
     return render_template("java_course.html", username=username, course=course, 
                            file_notes=file_notes, file_recordings=file_recordings, 
-                           file_assignments=file_assignments, file_assessments=file_assessments)
+                           file_assignments=file_assignments, file_assessments=file_assessments, csrf_token=csrf_token)
     
 """
 another process to download files from  directory 

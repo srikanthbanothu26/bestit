@@ -26,13 +26,17 @@ def faculty_reg():
 
 @faculty_bp.route('/faculty_login', methods=['GET', 'POST'])
 def faculty_login():
-    form = FacultyLoginForm(request.form)
+    form1 = FacultyLoginForm(request.form)
+    form2=FacultyForm(request.form)
     print("nothing change")
-    if form.validate_on_submit():
-        email = form.email.data
-        password = form.password.data
+    if form1.validate_on_submit():
+        email = form1.email.data
+        password = form1.password.data
+        course1=form1.course.data
+        course2=form2.course.data
+        
         faculty = Faculty.query.filter_by(email=email).first()
-        if faculty and bcrypt.check_password_hash(faculty.password_hash, password):
+        if faculty and bcrypt.check_password_hash(faculty.password_hash, password) and course1==course2:
             flash("Login successful.")
             session['email'] = faculty.email
             session['course'] = faculty.course
@@ -40,7 +44,7 @@ def faculty_login():
             return redirect(f"""/{user_course.lower()}_upload""")  
         else:
             flash("Invalid credentials. Login failed.")
-    return render_template('faculty_login.html', form=form)
+    return render_template('faculty_login.html', form=form1)
 
 
 @faculty_bp.route('/python_upload', methods=["GET", "POST"])
@@ -67,4 +71,17 @@ def python_upload():
 def java_upload():
     if 'email' not in session:
         return redirect('/faculty_login')
-    return render_template("JAVA.html")
+    
+    # Fetch current user's email from the session
+    user_email = session['email']
+
+    # Query the database to get the faculty information based on the email
+    faculty = Faculty.query.filter_by(email=user_email).first()
+
+    # Check if the faculty information is found
+    if faculty:
+        # Pass the user information to the HTML template
+        return render_template("PYTHON.html", email=faculty.email, id=faculty.id, course=faculty.course)
+    else:
+        # Handle the case where faculty information is not found
+        return "Faculty information not found."
