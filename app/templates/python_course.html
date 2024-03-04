@@ -212,37 +212,73 @@
                 <h1 class="text-2xl font-bold mb-4">NOTES</h1>
                 <ul>
                     {% for file in file_notes %}
-                    <li><a href="{{ url_for('uploads.uploaded_file', course='python', file_type='notes', filename=file) }}">{{ file }}</a></li>
+                    <li>
+                        <form class="download-form" 
+                              action="#" 
+                              method="post" 
+                              data-course="python" 
+                              data-file-type="notes" 
+                              data-filename="{{ file }}">
+                            <button type="submit" class="btn-link" enctype="multipart/form-data" accept=".txt,.pdf,.png,.jpg,.jpeg,.gif">{{ file }}</button>
+                        </form>
+                    </li>
                     {% endfor %}
                 </ul>                                                                
-            </div>  
+            </div>
+            
 
-            <div class="bg-sky-800 text-white p-6 rounded-lg mb-6 overflow-y-scroll h-full text-center" id="recordings">              
-                <h1 class="text-2xl font-bold mb-4">RECORDINGS</h1>                                
+            <div class="bg-blue-800 text-white p-6 rounded-lg mb-6 overflow-y-scroll h-full text-center" id="recordings">              
+                <h1 class="text-2xl font-bold mb-4">RECORDINGS</h1>
                 <ul>
                     {% for file in file_recordings %}
-                    <li><a href="{{ url_for('uploads.uploaded_file', course='python', file_type='recordings', filename=file) }}">{{ file }}</a></li>
+                    <li>
+                        <form class="download-form" 
+                              action="#" 
+                              method="post" 
+                              data-course="python" 
+                              data-file-type="recordings" 
+                              data-filename="{{ file }}">
+                            <button type="submit" class="btn-link" enctype="multipart/form-data" accept=".txt,.pdf,.png,.jpg,.jpeg,.gif">{{ file }}</button>
+                        </form>
+                    </li>
                     {% endfor %}
-                </ul>              
+                </ul>                                                                
             </div>
-            
-            <div class="bg-cyan-800 text-white p-6 rounded-lg mb-6 overflow-y-scroll h-full text-center" id="assignments">              
-                <h1 class="text-2xl font-bold mb-4">ASSIGNMENTS</h1>
-                <ul>
-                    {% for file in file_assignments %}
-                    <li><a href="{{ url_for('uploads.uploaded_file', course='python', file_type='assignments', filename=file) }}">{{ file }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
-            
-            <div class="bg-teal-800 text-white p-6 rounded-lg mb-6 overflow-y-scroll h-full text-center" id="assessments">              
+            <div class="bg-blue-800 text-white p-6 rounded-lg mb-6 overflow-y-scroll h-full text-center" id="notes">              
                 <h1 class="text-2xl font-bold mb-4">ASSESSMENTS</h1>
                 <ul>
                     {% for file in file_assessments %}
-                    <li><a href="{{ url_for('uploads.uploaded_file', course='python', file_type='assessments', filename=file) }}">{{ file }}</a></li>
+                    <li>
+                        <form class="download-form" 
+                              action="#" 
+                              method="post" 
+                              data-course="python" 
+                              data-file-type="assessments" 
+                              data-filename="{{ file }}">
+                            <button type="submit" class="btn-link" enctype="multipart/form-data" accept=".txt,.pdf,.png,.jpg,.jpeg,.gif">{{ file }}</button>
+                        </form>
+                    </li>
                     {% endfor %}
-                </ul>
-            </div>            
+                </ul>                                                                
+            </div>
+            
+            <div class="bg-blue-800 text-white p-6 rounded-lg mb-6 overflow-y-scroll h-full text-center" id="notes">              
+                <h1 class="text-2xl font-bold mb-4">ASSIGNMENTS</h1>
+                <ul>
+                    {% for file in file_assignments %}
+                    <li>
+                        <form class="download-form" 
+                              action="#" 
+                              method="post" 
+                              data-course="python" 
+                              data-file-type="recordings" 
+                              data-filename="{{ file }}">
+                            <button type="submit" class="btn-link" enctype="multipart/form-data" accept=".txt,.pdf,.png,.jpg,.jpeg,.gif">{{ file }}</button>
+                        </form>
+                    </li>
+                    {% endfor %}
+                </ul>                                                                
+            </div>           
         </div>
     </div>
     <script>
@@ -303,6 +339,43 @@
             });
         });
     </script>
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const downloadForms = document.querySelectorAll('.download-form');
+    
+            downloadForms.forEach(form => {
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault();
+    
+                    const filename = this.dataset.filename;
+                    const course = this.dataset.course;
+                    const file_type = this.dataset.fileType;
+    
+                    fetch(`/uploads/${course}/${file_type}/${filename}`)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('File not found');
+                            }
+                            return response.blob();
+                        })
+                        .then(blob => {
+                            const url = window.URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.style.display = 'none';
+                            a.href = url;
+                            a.download = filename;
+    
+                            document.body.appendChild(a);
+                            a.click();
+    
+                            window.URL.revokeObjectURL(url);
+                        })
+                        .catch(error => {
+                            console.error('Error downloading file:', error);
+                        });
+                });
+            });
+        });
+    </script>
 </body>
 </html>                        

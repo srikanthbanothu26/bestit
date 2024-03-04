@@ -1,4 +1,4 @@
-from flask import flash, redirect, request, session, Blueprint, send_from_directory, jsonify,current_app
+from flask import flash, redirect, request, session, Blueprint, send_from_directory, jsonify,current_app,Response
 from werkzeug.utils import secure_filename
 import os
 from app import Config
@@ -6,6 +6,7 @@ from app.models.models import Faculty, File
 from app.extensions.db import db
 from datetime import datetime
 import pytz
+from flask_login import login_required
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'docx'}
 
@@ -13,13 +14,14 @@ uploads_bp = Blueprint('uploads', __name__)
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
+#uploaded files downloaded here
 @uploads_bp.route('/uploads/<course>/<file_type>/<filename>', methods=["GET", "POST"])
+@login_required
 def uploaded_file(course, file_type, filename):
     print(f"Course received: {course}")
     print(f"File type received: {file_type}")
 
-    course_folders = Config.UPLOAD_FOLDERS.get(course)
+    course_folders = current_app.config.get('UPLOAD_FOLDERS', {}).get(course)
     if not course_folders:
         print(f"Course '{course}' is not valid")
         return "Course not found", 404
@@ -30,14 +32,18 @@ def uploaded_file(course, file_type, filename):
         return "File type not found", 404
 
     file_path = os.path.join(upload_folder, filename)
+    print(f"Upload folder: {upload_folder}")
+    print(f"File path: {file_path}")
+
     if os.path.exists(file_path):
         print(f"File '{filename}' exists at '{file_path}'")
-        return send_from_directory(upload_folder, filename)
+        return "exists"
+
     else:
         print(f"File '{filename}' not found at '{file_path}'")
         return "File not found", 404
 
-
+#file uploads here
 @uploads_bp.route('/upload/<file_type>', methods=["POST"])
 def upload_file(file_type):
     if 'email' not in session:
@@ -106,7 +112,7 @@ def search_files():
     files_data = [{'filename': file.filename, 'day': file.day} for file in files]
     return jsonify(files_data)
 
-
+#for uploaded files diplasying purpose
 @uploads_bp.route('/uploaded_files', methods=['GET'])
 def get_uploaded_files():
     if 'email' not in session:
@@ -121,7 +127,7 @@ def get_uploaded_files():
     files = [{'filename': file.filename, 'day': file.day} for file in user_files]
     return jsonify(files)
 
-
+#for deleting files 
 @uploads_bp.route('/deletefile', methods=['POST'])
 def delete_files():
     filename = request.json.get('filename')
