@@ -49,4 +49,3 @@ def java_course():
     return render_template("java_course.html", username=username, course=course, 
                            file_notes=file_notes, file_recordings=file_recordings, 
                            file_assignments=file_assignments, file_assessments=file_assessments)
-

@@ -14,10 +14,28 @@ uploads_bp = Blueprint('uploads', __name__)
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@uploads_bp.route('/uploads/<filename>', methods=["GET", "POST"])
-def uploaded_file(filename):
-    upload_folders = [Config.UPLOAD_FOLDERS[course][file_type] for course in Config.UPLOAD_FOLDERS for file_type in Config.UPLOAD_FOLDERS[course]]
-    return ",\n".join(send_from_directory(folder, filename) for folder in upload_folders)
+@uploads_bp.route('/uploads/<course>/<file_type>/<filename>', methods=["GET", "POST"])
+def uploaded_file(course, file_type, filename):
+    print(f"Course received: {course}")
+    print(f"File type received: {file_type}")
+
+    course_folders = Config.UPLOAD_FOLDERS.get(course)
+    if not course_folders:
+        print(f"Course '{course}' is not valid")
+        return "Course not found", 404
+
+    upload_folder = course_folders.get(file_type)
+    if not upload_folder:
+        print(f"File type '{file_type}' is not valid for course '{course}'")
+        return "File type not found", 404
+
+    file_path = os.path.join(upload_folder, filename)
+    if os.path.exists(file_path):
+        print(f"File '{filename}' exists at '{file_path}'")
+        return send_from_directory(upload_folder, filename)
+    else:
+        print(f"File '{filename}' not found at '{file_path}'")
+        return "File not found", 404
 
 
 @uploads_bp.route('/upload/<file_type>', methods=["POST"])
