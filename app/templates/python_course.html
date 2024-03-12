@@ -342,15 +342,15 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const downloadForms = document.querySelectorAll('.download-form');
-    
+        
             downloadForms.forEach(form => {
                 form.addEventListener('submit', function(event) {
                     event.preventDefault();
-    
+        
                     const filename = this.dataset.filename;
                     const course = this.dataset.course;
-                    const file_type = this.dataset.fileType;
-    
+                    const file_type = this.dataset.fileType; // Corrected variable name
+        
                     fetch(`/uploads/${course}/${file_type}/${filename}`)
                         .then(response => {
                             if (!response.ok) {
@@ -364,10 +364,10 @@
                             a.style.display = 'none';
                             a.href = url;
                             a.download = filename;
-    
+        
                             document.body.appendChild(a);
                             a.click();
-    
+        
                             window.URL.revokeObjectURL(url);
                         })
                         .catch(error => {
@@ -375,7 +375,7 @@
                         });
                 });
             });
-        });
+        });        
     </script>
 </body>
 </html>                        
