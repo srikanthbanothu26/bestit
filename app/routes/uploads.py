@@ -14,7 +14,9 @@ uploads_bp = Blueprint('uploads', __name__)
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 #uploaded files downloaded here
+
 @uploads_bp.route('/uploads/<course>/<file_type>/<filename>', methods=["GET", "POST"])
 @login_required
 def uploaded_file(course, file_type, filename):
