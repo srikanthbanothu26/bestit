@@ -351,7 +351,7 @@
                     const course = this.dataset.course;
                     const file_type = this.dataset.fileType; // Corrected variable name
         
-                    fetch(`/uploads/${course}/${file_type}/${filename}`)
+                    fetch(`uploads/${course}/${file_type}/${filename}`)
                         .then(response => {
                             if (!response.ok) {
                                 throw new Error('File not found');

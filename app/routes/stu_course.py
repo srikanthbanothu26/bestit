@@ -125,33 +125,29 @@ def TT_course():
                            file_assignments=file_assignments, file_assessments=file_assessments, csrf_token=csrf_token)
     
     
-"""
-another process to download files from  directory 
+
+from flask import make_response
 
 @course_bp.route('/<course>/<file_type>/<filename>', methods=["GET", "POST"])
 @login_required
 def course_file(course, file_type, filename):
-    print(f"Course received: {course}")
-    print(f"File type received: {file_type}")
-
     course_folders = current_app.config.get('UPLOAD_FOLDERS', {}).get(course)
     if not course_folders:
-        print(f"Course '{course}' is not valid")
         return "Course not found", 404
 
     upload_folder = course_folders.get(file_type)
     if not upload_folder:
-        print(f"File type '{file_type}' is not valid for course '{course}'")
         return "File type not found", 404
 
     file_path = os.path.join(upload_folder, filename)
-    print(f"Upload folder: {upload_folder}")
-    print(f"File path: {file_path}")
 
     if os.path.exists(file_path):
-        print(f"File '{filename}' exists at '{file_path}'")
-        return "existed"
+        # Read the file content and strip any trailing whitespace or newline characters
+        with open(file_path, 'rb') as file:
+            content = file.read().strip()
+        # Create a Flask response object with the file content and appropriate headers
+        response = make_response(content)
+        response.headers['Content-Disposition'] = f'attachment; filename="{filename}"'
+        return response
     else:
-        print(f"File '{filename}' not found at '{file_path}'")
         return "File not found", 404
-        """
