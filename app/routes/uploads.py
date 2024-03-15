@@ -8,7 +8,7 @@ from datetime import datetime
 import pytz
 from flask_login import login_required
 
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'docx'}
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'docx','mp4'}
 
 uploads_bp = Blueprint('uploads', __name__)
 
