@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, flash, request, session
+from flask import Blueprint, render_template, redirect, flash, request, session,jsonify
 from app.forms.forms import AssessmentForm
 from app.models.models import Assessment, Faculty
 from app.extensions.db import db
@@ -38,7 +38,7 @@ def upload_assessment():
                 return redirect(f"""/{course.lower()}_upload""")
             else:
                 flash('Faculty not found in the database!', 'error')
-
+                
     return render_template('upload_assessment.html', form=form)
 
 
@@ -48,3 +48,46 @@ def display_assessments(course):
     assessments = Assessment.query.filter_by(course=course).all()
     # Pass the assessments and their indices to the template, along with the enumerate function
     return render_template('displayassessments.html', assessments=assessments, index_start=1, enumerate=enumerate)
+
+
+
+
+@assessment_bp.route('/uploaded_questions/<int:faculty_id>', methods=['GET'])
+def get_uploaded_questions(faculty_id):
+    faculty = Faculty.query.get(faculty_id)
+    if not faculty:
+        return jsonify({'error': 'Faculty not found'}), 404
+
+    # Query the Assessment table to fetch questions based on faculty_id
+    uploaded_questions = Assessment.query.filter_by(faculty_id=faculty_id).all()
+    # Convert the list of Assessment objects to a list of dictionaries
+    questions = []
+    for question in uploaded_questions:
+        questions.append({
+            'id': question.id,  # assuming each question has an ID
+            'question': question.question,
+            'option1': question.option1,
+            'option2': question.option2,
+            'option3': question.option3,
+            'option4': question.option4,
+            'correct_answer': question.correct_answer
+        })
+    print(questions)
+    return jsonify(questions)
+
+
+@assessment_bp.route('/delete_question', methods=['POST'])
+def delete_question():
+    question_id = request.json.get('question_id')
+
+    # Query the Assessment table by question_id
+    question = Assessment.query.get(question_id)
+
+    if question:
+        # Delete the question record from the database
+        db.session.delete(question)
+        db.session.commit()
+        return '', 204
+    else:
+        # Question record not found in the database
+        return jsonify({'error': 'Question record not found in the database'}), 404
