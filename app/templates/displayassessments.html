@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessments</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="static/css/assessments.css">
+
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto py-8 flex">
+        <div class="w-3/4 bg-white rounded-lg shadow-md p-6">
+            <h2 id="question-title" class="text-xl font-semibold mb-4"></h2>
+            <ul id="options-list" class="list-disc ml-8"></ul>
+        </div>
+        <div class="w-1/4 ml-8">
+            <h2 class="text-xl font-bold mb-4">Questions</h2>
+            <div id="question-list" class="flex flex-col items-end">
+                <!-- Populate question numbers dynamically -->
+                {% for index, _ in enumerate(assessments) %}
+                    <div class="question-number mb-2" onclick="showQuestion({{ index }})">{{ index + 1 }}</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <script>
+        const questions = [
+            {% for assessment in assessments %}
+                {
+                    question: "{{ assessment.question }}",
+                    options: [
+                        "{{ assessment.option1 }}",
+                        "{{ assessment.option2 }}",
+                        "{{ assessment.option3 }}",
+                        "{{ assessment.option4 }}"
+                    ]
+                },
+            {% endfor %}
+        ];
+
+        const questionTitle = document.getElementById('question-title');
+        const optionsList = document.getElementById('options-list');
+
+        // Initially display the first question
+        showQuestion(0);
+
+        function showQuestion(index) {
+            const question = questions[index];
+            questionTitle.textContent = `Question ${index + 1}: ${question.question}`;
+            optionsList.innerHTML = '';
+            question.options.forEach(option => {
+                const li = document.createElement('li');
+                li.textContent = option;
+                optionsList.appendChild(li);
+            });
+            // Highlight selected question
+            const questionNumbers = document.querySelectorAll('.question-number');
+            questionNumbers.forEach((elem, idx) => {
+                if (idx === index) {
+                    elem.classList.add('font-bold', 'text-blue-500');
+                } else {
+                    elem.classList.remove('font-bold', 'text-blue-500');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

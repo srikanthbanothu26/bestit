@@ -57,4 +57,16 @@ class File(db.Model):
         # Format the datetime in Indian standard format # %I for 12-hour clock, %p for AM/PM
         return f"File(filename='{self.filename}', day='{self.day}')"
 
+class Assessment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    question = db.Column(db.String(255), nullable=False)
+    option1 = db.Column(db.String(255), nullable=False)
+    option2 = db.Column(db.String(255), nullable=False)
+    option3 = db.Column(db.String(255), nullable=False)
+    option4 = db.Column(db.String(255), nullable=False)
+    correct_answer = db.Column(db.String(255), nullable=False)
+    faculty_id = db.Column(db.Integer, db.ForeignKey('faculty.id'), nullable=False)
+    course = db.Column(db.String(64), nullable=False)  # Add course column
 
+    def __repr__(self):
+        return f"<Assessment {self.id}>"

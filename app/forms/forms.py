@@ -1,6 +1,6 @@
 #app/forms/form.py
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SelectField
+from wtforms import StringField, PasswordField, SelectField,SubmitField
 from wtforms.validators import InputRequired, Email, EqualTo, Length,DataRequired,ValidationError
 import re
 from app.models.models import User
@@ -48,3 +48,13 @@ class FacultyLoginForm(FlaskForm):
     password = PasswordField('Password', validators=[InputRequired()])
     course = SelectField('Choose Course', choices=[('python', 'Python'),('java', 'Java'),('testingtools','testingtools'),('digitalmarketing','digitalmarketing')], validators=[InputRequired()])
     
+    
+
+class AssessmentForm(FlaskForm):
+    question = StringField('Question', validators=[DataRequired()])
+    option1 = StringField('Option 1', validators=[DataRequired()])
+    option2 = StringField('Option 2', validators=[DataRequired()])
+    option3 = StringField('Option 3', validators=[DataRequired()])
+    option4 = StringField('Option 4', validators=[DataRequired()])
+    correct_answer = StringField('Correct Answer', validators=[DataRequired()])
+    submit = SubmitField('Upload')

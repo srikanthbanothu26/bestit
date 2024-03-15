@@ -1,0 +1,40 @@
+<!-- upload_assessment.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Assessment</title>
+</head>
+<body>
+    <h1>Upload Assessment</h1>
+    <form action="/upload_assessment" method="POST">
+        {{ form.csrf_token }}
+        <div>
+            <label for="question">Question:</label>
+            {{ form.question(class="form-control") }}
+        </div>
+        <div>
+            <label for="option1">Option 1:</label>
+            {{ form.option1(class="form-control") }}
+        </div>
+        <div>
+            <label for="option2">Option 2:</label>
+            {{ form.option2(class="form-control") }}
+        </div>
+        <div>
+            <label for="option3">Option 3:</label>
+            {{ form.option3(class="form-control") }}
+        </div>
+        <div>
+            <label for="option4">Option 4:</label>
+            {{ form.option4(class="form-control") }}
+        </div>
+        <div>
+            <label for="correct_answer">Correct Answer:</label>
+            {{ form.correct_answer(class="form-control") }}
+        </div>
+        <button type="submit">Upload Assessment</button>
+    </form>
+</body>
+</html>
