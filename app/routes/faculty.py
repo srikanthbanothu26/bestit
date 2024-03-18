@@ -129,23 +129,30 @@ def TT_upload():
     else:
         # Handle the case where faculty information is not found
         return "Faculty information not found."
-    
-@faculty_bp.route('/placements')
+ 
+@faculty_bp.route('/placements', methods=['GET', 'POST'])
 def placements():
     form = PlacementForm()
-    if request.method=="POST":
-        Date = form.Date.data
+    if form.validate_on_submit():
+        # Retrieve data from the form
+        date = form.Date.data
         company_name = form.placement_company_name.data
         company_details = form.placement_company_details.data
-        date_to_apply = form.last_date_to_apply.data
+        last_date_to_apply = form.last_date_to_apply.data
+        course=form.course.data
         
-        # Assuming your model class is named Placement, adjust this as per your actual model class name
-        new_placement = placement(Date=Date, placement_company_name=company_name, 
-                                company_details=company_details, last_date_to_apply=date_to_apply)
+        # Create a new Placement object
+        new_placement = placement(Date=date,course=course,
+                                  placement_company_name=company_name,
+                                  company_details=company_details,
+                                  last_date_to_apply=last_date_to_apply)
         
+        # Add the new placement to the database session
         db.session.add(new_placement)
         db.session.commit()
-    return render_template("placements.html", form=form)
-
+        
+        # Redirect to a success page or another route
+        return redirect('/admin')
     
-    
+    # If the request method is GET or form validation fails, render the form template
+    return render_template('placements.html', form=form)

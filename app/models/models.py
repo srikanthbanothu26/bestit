@@ -75,9 +75,11 @@ class Assessment(db.Model):
  
 class placement(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    Date =  db.Column(db.Date, nullable=True)
+    Date =  db.Column(db.Date, nullable=False)
     placement_company_name = db.Column(db.String(255), nullable=False)
     company_details=db.Column(db.String(600), nullable=False)   
-    last_date_to_apply = db.Column(db.Date, nullable=True)  # Assuming it's a date
+    last_date_to_apply = db.Column(db.Date, nullable=False)
+    course = db.Column(db.String(64), nullable=False)
+    
     def __repr__(self):
         return f"<Placement {self.id}>"

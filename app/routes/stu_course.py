@@ -3,6 +3,7 @@ import os
 from app.oper.oper import get_user_course
 from flask_wtf.csrf import generate_csrf
 from flask_login import login_required
+from app.models.models import placement
 
 course_bp = Blueprint("course", __name__)
 
@@ -29,10 +30,13 @@ def python_course():
     file_recordings = os.listdir(upload_folders.get('recordings', ''))
     file_assignments = os.listdir(upload_folders.get('assignments', ''))
     file_assessments = os.listdir(upload_folders.get('assessments', ''))
+    # Query placements related to the Python course
+    python_course_placements = placement.query.filter_by(course='python').all()
+
     
     return render_template("python_course.html", username=username, course=course, 
                            file_notes=file_notes, file_recordings=file_recordings, 
-                           file_assignments=file_assignments, file_assessments=file_assessments, csrf_token=csrf_token)
+                           file_assignments=file_assignments, file_assessments=file_assessments, csrf_token=csrf_token,python_course_placements=python_course_placements)
 
 @course_bp.route("/java_course", methods=["GET", "POST"])
 def java_course():

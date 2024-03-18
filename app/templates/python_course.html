@@ -155,38 +155,30 @@
                     </div>   
                 </div>
             </div>
-            <div class="bg-gray-200 text-gray-800 p-6 rounded-lg mb-6 text-center h-full mt-10" id="placements">
-          
+            <div class="flex flex-col items-center h-96 rounded-lg mt-10 bg-gray-200 text-gray-800 p-6 rounded-lg mb-6" id="placements">
                 <h1 class="text-2xl font-bold mb-4 ">PLACEMENT ANNOUNCEMENTS</h1>
-              
-                <ol class="announcements-list overflow-y-scroll h-96">
-                    <li class="announcement mb-4">
-                    <p class="announcement-date font-bold text-gray-600">January 15, 2024</p>
-                        <h2>Announcement Title 1</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod lacus ligula.</p>
-                    </li>
-                    <p class="announcement-date font-bold text-gray-600">February 2, 2024</p>
-                        <h2>Announcement Title 2</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod lacus ligula.</p>
-                    </li>
-                    <li class="announcement mb-4">
-                        <p class="announcement-date font-bold text-gray-600">March 10, 2024</p>
-                        <h2>Announcement Title 3</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod lacus ligula.</p>
-                    </li>
-                    <li class="announcement mb-4">
-                        <p class="announcement-date font-bold text-gray-600">April 1, 2024</p>
-                        <h2>Announcement Title 4</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod lacus ligula.</p>
-                    </li>
-                    <li class="announcement mb-4">
-                        <p class="announcement-date font-bold text-gray-600">May 5, 2024</p>
-                        <h2>Announcement Title 5</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod lacus ligula.</p>
-                    </li>
-
-                </ol>
-            </div>     
+                <table class="text-black border-collapse w-full">
+                    <thead>
+                        <tr>
+                            <th class="border border-gray-300 px-4 py-2">Date</th>
+                            <th class="border border-gray-300 px-4 py-2">Company Name</th>
+                            <th class="border border-gray-300 px-4 py-2">Company Details</th>
+                            <th class="border border-gray-300 px-4 py-2">Last Date to Apply</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for placement in python_course_placements %}
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2">{{ placement.Date }}</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ placement.placement_company_name }}</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ placement.company_details }}</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ placement.last_date_to_apply }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                             
+            </div>
             <div class="bg-blue-800 text-white p-6 rounded-lg mb-6 overflow-y-scroll h-full text-center" id="notes">              
                 <h1 class="text-2xl font-bold mb-4">NOTES</h1>
                 <ul>

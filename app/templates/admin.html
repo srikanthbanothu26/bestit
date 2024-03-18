@@ -3,12 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faculty  Form</title>
+    <title>Admin Page</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-r from-red-500 to-blue-500 grid place-items-center justify-center h-screen" >
-    <div>
-        <a href="/placements">placements</a>
+<body class="bg-black">
+    <div class="text-white grid place-items-center justify-center mt-10">
+        <a class="bg-green-600 border-2 rounded-lg p-4 " href="/placements">tap to add placements</a>
     </div>
+    <div class="flex flex-col items-center h-96 bg-green-600 rounded-lg mt-10">
+        {% for x in new_placement%}
+            <div class="flex-row flex justify-center gap-4 h-10">
+                <p class="text-white">{{x.id }}</p>
+                <p class="text-white">Date: {{x.Date }}</p>
+                <p class="text-white">Company Name: {{ x.placement_company_name }}</p>
+                <p class="text-white">Company Details: {{ x.company_details }}</p>
+                <p class="text-white">Last Date to Apply: {{ x.last_date_to_apply }}</p>
+                <p class="text-white">course: {{ x.course }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
 </body>
 </html>

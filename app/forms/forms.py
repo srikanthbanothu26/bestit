@@ -65,4 +65,5 @@ class PlacementForm(FlaskForm):
     placement_company_name = StringField('Company Name', validators=[DataRequired()])
     placement_company_details=StringField('Company details', validators=[DataRequired()])
     last_date_to_apply = DateField('Last Date to Apply', validators=[DataRequired()], format='%Y-%m-%d')
+    course = SelectField('Choose Course', choices=[('python', 'Python'),('java', 'Java'),('testingtools','testingtools'),('digitalmarketing','digitalmarketing')], validators=[InputRequired()])
     submit = SubmitField('Upload')

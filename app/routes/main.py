@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, session, redirect, request, flash
 from flask_login import login_required
+from app.models.models import placement
 
 main_bp = Blueprint("main", __name__)
 
@@ -51,4 +52,8 @@ def tt_info():
 
 @main_bp.route("/admin")
 def admin():
-    return render_template("admin.html")
+
+        # Fetch the placement object from the database
+    new_placement = placement.query.all()
+    
+    return render_template('admin.html', new_placement=new_placement)
