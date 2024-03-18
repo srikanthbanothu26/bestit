@@ -1,6 +1,6 @@
 #app/forms/form.py
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SelectField,SubmitField
+from wtforms import StringField, PasswordField, SelectField,SubmitField,DateField
 from wtforms.validators import InputRequired, Email, EqualTo, Length,DataRequired,ValidationError
 import re
 from app.models.models import User
@@ -57,4 +57,12 @@ class AssessmentForm(FlaskForm):
     option3 = StringField('Option 3', validators=[DataRequired()])
     option4 = StringField('Option 4', validators=[DataRequired()])
     correct_answer = StringField('Correct Answer', validators=[DataRequired()])
+    submit = SubmitField('Upload')
+
+
+class PlacementForm(FlaskForm):
+    Date=DateField('today', validators=[DataRequired()], format='%Y-%m-%d')
+    placement_company_name = StringField('Company Name', validators=[DataRequired()])
+    placement_company_details=StringField('Company details', validators=[DataRequired()])
+    last_date_to_apply = DateField('Last Date to Apply', validators=[DataRequired()], format='%Y-%m-%d')
     submit = SubmitField('Upload')

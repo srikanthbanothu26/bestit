@@ -7,19 +7,25 @@
     <title>Python Course</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet"  href="static\css\first.css">
 </head>
-<body class="bg-gray-100 font-sans bg-custom ">
-    <div class="bg-green-800 text-white flex flex-row w-full h-20 justify-between fixed">
-        <div class="flex flex-row">
-            <div>
-                <img src="\static\images\Picture2.png" class="h-16 rounded-full">
-            </div>
+<body class="bg-black font-sans">
+    <div class="bg-gradient-to-r from-blue-800 to-rose-500 text-white flex flex-row w-full h-20 justify-between fixed">
+        <div class="flex flex-row w-full justify-between">
             <ul class="flex flex-col text-xl ml-4">
-                <b class="text-2xl">B E S T</b>
-                <b class="">IT Academy</b>
+                <a href="" class="text-2xl text-gradient">B E S T</a>
+                <a href="" class="">IT Academy</a>
             </ul>
+            <div class="flex  text-green-500  items-center gap-6"> 
+                <button class="bg-green-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg w-full focus:outline-none" onclick="scrollToSection('Circulam')">CIRCULUM</button> 
+                <button class="bg-green-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg w-full focus:outline-none" onclick="scrollToSection('placements')">PLACEMENTS</button>      
+                <button class="bg-green-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg w-full focus:outline-none" onclick="scrollToSection('notes')">NOTES</button>
+                <button class="bg-green-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg w-full focus:outline-none" onclick="scrollToSection('recordings')">RECORDINGS</button>               
+                <button class="bg-green-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg w-full focus:outline-none" onclick="scrollToSection('assignments')">ASSIGNMENTS</button>         
+                <button class="bg-green-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg w-full focus:outline-none" onclick="scrollToSection('assessments')">ASSESSMENTS</button>          
+            </div>     
         </div>
-        <div class="bg-red-700 h-96 w-56 grid grid-cols-1 justify-center items-center rounded-md">
+        <div class="bg-red-700 h-96 w-70 grid grid-cols-1 justify-center items-center rounded-md">
             <div class="pl-8 pr-8">
                 <div class="profile-image-container ml-16">
                     {% if current_user.profile_image %}
@@ -37,37 +43,10 @@
                 <p class="mb-10">course:{{current_user.course}}</p>
                 <a href="/" class="border border-white py-1 px-3 rounded-lg mt-8">LOGOUT</a>
             </div>
-        </div>
+        </div>   
     </div>
-    <div class="bg-black w-full h-20">
-    </div>
-    <div class="container flex justify-between gap-30">  
-        <div class="w-1/5 grid grid-cols-1 fixed text-green-500 p-6 items-center"> 
-            <div class="my-4">
-                <button class="bg-green-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full w-full" onclick="scrollToSection('Circulam')">CIRCULAM</button> 
-            </div>
-            <div class="my-4">
-                <button class="bg-green-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full w-full" onclick="scrollToSection('placements')">PLACEMENTS</button>      
-            </div>
-            <div class="my-4">
-                <button class="bg-green-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full w-full" onclick="scrollToSection('notes')">NOTES</button>
-            </div>
-            <div class="my-4">
-                <button class="bg-green-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full w-full" onclick="scrollToSection('recordings')">RECORDINGS</button>
-               
-            </div>
-            <div class="my-4">
-                <button class="bg-green-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full w-full" onclick="scrollToSection('assignments')">ASSIGNMENTS</button>
-             
-            </div>
-            <div class="my-4">
-                <button class="bg-green-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full w-full" onclick="scrollToSection('assessments')">ASSESSMENTS</button>
-              
-            </div>      
-        </div>
-        <div class="w-1/5 bg-black">
-        </div>
-        <div class="w-3/4 px-6 mt-10 grid grid-cols-1 ml-16 gap-20">
+    <div class="container grid grid-cols-3 pt-16">  
+        <div class="px-6 mt-10 grid grid-cols-1 ml-16 gap-20 col-span-2">
             <div class="bg-indigo-600 text-white p-6 rounded-lg mb-6 h-full pl-16 grid items-center justify-center" id="Circulam">
                 <h1 class="text-2xl font-bold mb-4 text-center h-24">CIRCULAM</h1>
                 <div class="overflow-y-scroll h-64 pr-10">
@@ -321,10 +300,11 @@
         }
     });
     </script>
-    
     <script>
         function scrollToSection(sectionId) {
+            console.log("Scrolling to section:", sectionId);
             var section = document.getElementById(sectionId);
+            console.log("Section element:", section);
             if (section) {
                 section.scrollIntoView({ behavior: 'smooth' });
             }

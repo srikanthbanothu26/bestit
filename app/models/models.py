@@ -70,3 +70,14 @@ class Assessment(db.Model):
 
     def __repr__(self):
         return f"<Assessment {self.id}>"
+    
+    
+ 
+class placement(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    Date =  db.Column(db.Date, nullable=True)
+    placement_company_name = db.Column(db.String(255), nullable=False)
+    company_details=db.Column(db.String(600), nullable=False)   
+    last_date_to_apply = db.Column(db.Date, nullable=True)  # Assuming it's a date
+    def __repr__(self):
+        return f"<Placement {self.id}>"

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placement Form</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+<div class="container mx-auto mt-8">
+    <h2 class="text-2xl font-bold mb-4">Placement Form</h2>
+    <form method="POST" class="max-w-md bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        {{ form.hidden_tag() }}
+        <div class="mb-6">
+            <label for="Date" class="block text-gray-700 text-sm font-bold mb-2">today</label>
+            <input type="text" id="Date" name="Date" autocomplete="off" class="form-input w-full">
+        </div>
+        <div class="mb-4">
+            <label for="companyName" class="block text-gray-700 text-sm font-bold mb-2">Company Name</label>
+            {{ form.placement_company_name(class="form-input w-full") }}
+        </div>
+        <div class="mb-4">
+            <label for="companyDetails" class="block text-gray-700 text-sm font-bold mb-2">Company Details</label>
+            {{ form.placement_company_details(class="form-input w-full") }}
+        </div>
+        <div class="mb-6">
+            <label for="lastDate" class="block text-gray-700 text-sm font-bold mb-2">Last Date to Apply</label>
+            <input type="text" id="lastDate" name="lastDate" autocomplete="off" class="form-input w-full">
+        </div>
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Submit</button>
+    </form>
+</div>
+
+<!-- Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    // Initialize Flatpickr
+    flatpickr("#lastDate", {
+        dateFormat: "Y-m-d",
+        allowInput: true, // Allow manual date entry
+        altInput: true, // Enable alternate input field
+        altFormat: "F j, Y", // Use this format for alternate input field
+        // You can customize Flatpickr options here
+    });
+    flatpickr("#Date", {
+        dateFormat: "Y-m-d",
+        allowInput: true, // Allow manual date entry
+        altInput: true, // Enable alternate input field
+        altFormat: "F j, Y", // Use this format for alternate input field
+        // You can customize Flatpickr options here
+    });
+</script>
+
+</body>
+</html>

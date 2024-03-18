@@ -46,3 +46,9 @@ def dm_info():
 @main_bp.route('/testingtools_info', methods=['GET','POST'])
 def tt_info():
     return render_template('ttinfo.html')
+
+
+
+@main_bp.route("/admin")
+def admin():
+    return render_template("admin.html")

@@ -1,10 +1,10 @@
 from flask import Blueprint, render_template, redirect, flash, session, request
-from app.forms.forms import FacultyForm, FacultyLoginForm
+from app.forms.forms import FacultyForm, FacultyLoginForm,PlacementForm
 from app.oper.oper import check_faculty_exists, add_faculty
 from flask_bcrypt import Bcrypt
 from flask_login import login_user
-from app.models.models import Faculty
-
+from app.models.models import Faculty,placement
+from app.extensions.db import db
 bcrypt = Bcrypt() 
 faculty_bp = Blueprint('faculty', __name__)
 
@@ -130,9 +130,22 @@ def TT_upload():
         # Handle the case where faculty information is not found
         return "Faculty information not found."
     
-    
-    
-    
-    
+@faculty_bp.route('/placements')
+def placements():
+    form = PlacementForm()
+    if request.method=="POST":
+        Date = form.Date.data
+        company_name = form.placement_company_name.data
+        company_details = form.placement_company_details.data
+        date_to_apply = form.last_date_to_apply.data
+        
+        # Assuming your model class is named Placement, adjust this as per your actual model class name
+        new_placement = placement(Date=Date, placement_company_name=company_name, 
+                                company_details=company_details, last_date_to_apply=date_to_apply)
+        
+        db.session.add(new_placement)
+        db.session.commit()
+    return render_template("placements.html", form=form)
+
     
     
