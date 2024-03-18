@@ -190,3 +190,10 @@ body{
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+.container_1,.container_2,.container_3,.container_4 {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.container_1:hover,.container_2:hover,.container_3:hover,.container_4:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

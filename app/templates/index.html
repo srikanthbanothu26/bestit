@@ -15,35 +15,37 @@
     <div class="first bg-gradient-to-r from-blue-800 to-rose-500" id="home">
         <div class="x cursor-pointer">
             <div class="ml-20 flex flex-row rounded-full">
-                <div>
+                <!--<div>
                     <img src="\static\images\Picture2.png" class="h-16">
-                </div>
-                <ul class="flex flex-col text-xl pr-4">
-                    <b class="ml-2 text-2xl text-gradient">B E S T</b>
-                    <b class="">IT Academy</b>
-                </ul> 
+                </div>-->
+                <a href="/">
+                    <ul class="flex flex-col text-xl pr-4">
+                        <b class="ml-2 text-2xl text-gradient">B E S T</b>
+                        <b class="">IT Academy</b>
+                    </ul> 
+                </a>
             </div>
         </div>
         <div class="y cursor-pointer">
-            <div class="home">
+            <div class="home container_1">
                 <form method="post" action="/">
                     <button type="submit" onclick="scrollToSection('home')">HOME</button>
                 </form>
             </div> 
-            <div class="about">
+            <div class="about container_1">
                 <button onclick="scrollToSection('about')">ABOUT</button>
             </div> 
-            <div class="COURSES">
+            <div class="COURSES container_1">
                 <button onclick="scrollToSection('COURSES')">COURSES</button>
             </div> 
-            <div class="contact">
+            <div class="contact container_1">
                 <button onclick="scrollToSection('contact')">CONTACT</button>
             </div>
             <div class="main">
-                <form method="POST" action='/student_registration'>
+                <form method="POST" action='/student_registration' class="container_1">
                     <button type="submit">REGISTRATION</button>
                 </form>
-                <form method="POST" action='/student_login'>
+                <form method="POST" action='/student_login' class="container_1">
                     <button type="submit">LOGIN</button>
                 </form>
             </div>
@@ -60,14 +62,14 @@
                     <p class="text-right text-white text-2xl mr-4 font-bold">Where Innovation Meets Expertise!</p>
                 </dd>
                 <span class="mt-48">
-                    <div class="get">
+                    <div class="get container_1">
                         <form method="POST" action='/student_registration'>
                             <button type="submit" class="w-48 h-16 font-sans">
                                 Get Started
                             </button>
                         </form>
                     </div>
-                    <div class="buttons">
+                    <div class="buttons container_1">
                         <form method="POST">
                             <button type="submit" formaction="/pics">
                                 <p class="mr-8"><b>&#9656;</b></p>
@@ -80,45 +82,45 @@
         </div>
     </div>
     <!--third box-->
-    <div id="COURSES" class="pl-12 py-10 grid bg-gradient-to-r from-white via-purple-600 to-white" >
-        <div>
-            <h1 class="text-6xl font-bold mb-10 text-center text-gradient">Courses</h1>
+    <div id="COURSES" class="py-10 grid gap-10 pl-10 pr-10" >
+        <div class="container_1">
+            <h1 class="text-4xl font-bold text-center text-gradient">Courses</h1>
         </div>
-        <div class="container mx-auto py-8">
-            <div class="grid grid-cols-3 gap-8 place-items-center">
-                <div class="flex flex-col gap-4 w-80">
+        <div class="container gap-x-10 pt-10">
+            <div class="grid grid-cols-4 place-items-center mr-10 ml-10">
+                <div class="container_1 flex flex-col gap-4 w-64 ">
                     <div class="overflow-hidden place-items-center flex flex-col rounded-lg">
-                        <img src="static\images\Picture4 (2).png" alt="Python Course Image" class="h-64 object-cover mb-2">
+                        <a href="/python_info " class="cursor-pointer"><img src="static\images\Picture4 (2).png" alt="Python Course Image" class="h-36 object-cover mb-2 cursor-pointer shadow-lg border-2 rounded-lg"></a>
                         <a class="px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg" href="/python_info">PYTHON</a>
                     </div>
-                    <div class="border-t-2 h-16  flex justify-center">
+                    <div class="border-t-2 h-16  inline flex justify-center">
                         <p class="p-4 text-gray-700"><i class="fas fa-clock"></i> 2 months</p>
                     </div>
                 </div>
-                <div class="flex flex-col gap-4 w-80">
-                    <div class="overflow-hidden rounded-lg  place-items-center flex flex-col">
-                        <img src="https://c7.alamy.com/comp/T48W60/java-programming-concept-virtual-machine-on-server-room-background-T48W60.jpg" alt="Java Course Image" class="h-64 object-cover mb-2">
+                <div class="container_2 flex flex-col gap-4 w-64">
+                    <div class=" overflow-hidden place-items-center flex flex-col rounded-lg ">
+                        <img src="https://c7.alamy.com/comp/T48W60/java-programming-concept-virtual-machine-on-server-room-background-T48W60.jpg" alt="Java Course Image" class="h-36 object-cover mb-2 cursor-pointer shadow-lg border-2 rounded-lg">
                         <a class="px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg" href="/java_info">JAVA</a>
                     </div>
                     <div class="border-t-2 h-16 inline flex justify-center">
                         <p class="p-4 text-gray-700"><i class="fas fa-clock"></i> 2 months</p>
                     </div>
                 </div>
-                <div class="flex flex-col gap-4 w-80">
+                <div class="container_3 flex flex-col gap-4 w-64 ">
                     <div class="overflow-hidden rounded-lg  place-items-center flex flex-col">
-                        <img src="https://profoundedutech.com/blog/wp-content/uploads/2019/12/No-3.png" alt="Testing Tools Image" class="h-64 object-cover mb-2">
+                        <img src="https://profoundedutech.com/blog/wp-content/uploads/2019/12/No-3.png" alt="Testing Tools Image" class="h-36 object-cover mb-2 border-2 cursor-pointer shadow-lg  rounded-lg">
                         <a class="px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg" href="/testingtools_info">TESTING TOOLS</a>
-                    </div>
-                    <div class="border-t-2 h-16 flex justify-center">
+                    </div> 
+                    <div class="border-t-2 h-16 flex inline justify-center">
                         <p class="p-4 text-gray-700"><i class="fas fa-clock"></i> 2 months</p>
                     </div>
                 </div>
-                <div class="flex flex-col gap-4 w-80">
+                <div class="container_4 flex flex-col gap-4 w-64 ">
                     <div class="overflow-hidden rounded-lg  place-items-center flex flex-col">
-                        <img src="https://img.freepik.com/free-photo/digital-marketing-with-icons-business-people_53876-94833.jpg?size=626&ext=jpg" alt="Digital marketing image" class="h-64 object-cover mb-2">
+                        <img src="https://img.freepik.com/free-photo/digital-marketing-with-icons-business-people_53876-94833.jpg?size=626&ext=jpg" alt="Digital marketing image" class="h-36 object-cover mb-2 cursor-pointer shadow-lg  border-2 rounded-lg">
                         <a class="px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg" href="digitalmarketing_info">Digital Marketing</a>
                     </div>
-                    <div class="border-t-2 h-16 flex justify-center">
+                    <div class="border-t-2 h-16 flex inline justify-center">
                         <p class="p-4 text-gray-700"><i class="fas fa-clock"></i> 2 months</p>
                     </div>
                 </div>
@@ -126,15 +128,15 @@
         </div>
     </div>
     <!--forth box-->
-    <div class="py-20 text-center text-white grid grid-cols-2 bg-gradient-to-r from-rose-800 via-purple-600 to-purple-800">
-        <div id="about" class="py-20 w-full">
+    <div class="py-20 text-center text-white grid grid-cols-3">
+        <div id="about" class="ml-8 py-10 w-3/4 bg-blue-800 rounded-md">
             <div class="grid grid-cols-1 justify-center flex place-items-center gap-10">
                 <div>
-                    <h1 class="text-5xl font-bold mb-16 mr-24">ABOUT US</h1>
+                    <h1 class="text-5xl font-bold mb-16">ABOUT US</h1>
                 </div>
-                <div class="h-56 rounded-lg grid grid-cols-2 w-96">
-                    <div class="h-56 w-56">
-                        <img class="h-56 w-56 rounded-md" src="static\images\IMG_9275.JPG" alt="Rakesh's Photo">
+                <div class="rounded-lg grid grid-cols-1 w-60 container_1">
+                    <div class="h-56 w-48">
+                        <img class="h-56 w-48 rounded-md" src="static\images\IMG_9275.JPG" alt="Rakesh's Photo">
                     </div>
                     <div class="flex flex-col justify-center place-items-center">
                         <h1 class="text-white hover:text-red-600 hover:text-4xl">Rakesh</h1>
@@ -142,9 +144,9 @@
                         <ul>MD</ul>
                     </div>
                 </div>
-                <div class="h-56 rounded-lg grid grid-cols-2 w-96">
-                    <div class="h-56 w-56">
-                        <img class="h-56 w-56 rounded-md" src="static\images\IMG_9275.JPG" alt="Rakesh's Photo">
+                <div class="rounded-lg grid grid-cols-1 w-60 container_1">
+                    <div class="h-56 w-48">
+                        <img class="h-56 w-48 rounded-md" src="static\images\IMG_9275.JPG" alt="Rakesh's Photo">
                     </div>
                     <div class="flex flex-col justify-center place-items-center">
                         <p class="text-white hover:text-red-600 hover:text-4xl">Rakesh</p>
@@ -154,12 +156,12 @@
                 </div>
             </div>
         </div>
-        <div class="grid grid-cols-1 gap-10 justify-center items-center flex mt-20 mr-4">
+        <div class="grid grid-cols-1 gap-10 justify-center items-center flex  mr-4 pl-10 col-span-2 bg-gradient-to-r from-rose-800 via-purple-600 to-purple-800">
             <div>
                 <h1 class="text-3xl font-bold text-center mb-8"><u>What Our Organization Offers:</u></h1>
             </div>
-            <div class="grid grid-cols-2 gap-10">
-                <div class="flex flex-col">
+            <div class="grid grid-cols-4 gap-4 mb-10">
+                <div class="flex flex-col container_1">
                     <div>
                         <h1 class="text-2xl font-bold">Technical Training:</h1>
                     </div>
@@ -171,7 +173,7 @@
                         </ol>
                     </div>
                 </div>
-                <div>
+                <div class="container_1">
                     <div>
                         <h1 class="text-2xl font-bold">Soft Skills Development:</h1>
                     </div>
@@ -182,7 +184,7 @@
                         </ol>
                     </div>
                 </div>
-                <div>
+                <div class="container_1">
                     <div>
                         <h1 class="text-2xl font-bold">IT Infrastructure Services:</h1>
                     </div>
@@ -194,7 +196,7 @@
                         </ol>
                     </div>
                 </div>
-                <div>
+                <div class="container_1">
                     <div>
                         <h1 class="text-2xl font-bold">Certification Programs:</h1>
                     </div>
@@ -205,7 +207,7 @@
                         </ol>
                     </div>
                 </div>
-                <div>
+                <div class="container_1">
                     <div>
                         <h1 class="text-2xl font-bold">Quality Assurance and Testing:</h1>
                     </div>
@@ -216,7 +218,7 @@
                         </ol>
                     </div>
                 </div>
-                <div>
+                <div class="container_1">
                     <div>
                         <h1 class="text-2xl font-bold">Internship and Placement Assistance:</h1>
                     </div>
@@ -227,7 +229,7 @@
                         </ol>
                     </div>
                 </div>
-                <div>
+                <div class="container_1">
                     <div>
                         <h1 class="text-2xl font-bold">DevOps Practices:</h1>
                     </div>
@@ -238,7 +240,7 @@
                         </ol>
                     </div>
                 </div>
-                <div>
+                <div class="container_1">
                     <div>
                         <h1 class="text-2xl font-bold">Mock Interviews and Career Counseling:</h1>
                     </div>
@@ -249,7 +251,7 @@
                         </ol>
                     </div>
                 </div>
-                <div>
+                <div class="container_1">
                     <div>
                         <h1 class="text-2xl font-bold">Digital Marketing:</h1>
                     </div>
@@ -261,7 +263,7 @@
                         </ol>
                     </div>
                 </div>
-                <div>
+                <div class="container_1">
                     <div>
                         <h1 class="text-2xl font-bold">Facility Access:</h1>
                     </div>
@@ -279,11 +281,12 @@
     <div id="contact" class="bg-neutral-900 h-64 scroll-m-0 grid grid-cols-3 fixed-bottom">
         <div class=" text-xl flex flex-col gap-2 pt-8 ml-20 text-slate-400"> 
             <div class="flex flex-row rounded-full w-48">
-                <div>
+                <!--<div>
                     <img src="\static\images\Picture2.png" class="h-16">
                 </div>
+                -->
                 <ul class="flex flex-col text-xl">
-                    <b class="ml-2 text-2xl">B E S T</b>
+                    <b class="ml-2 text-2xl text-gradient">B E S T</b>
                     <b class="">IT Academy</b>
                 </ul> 
             </div>
