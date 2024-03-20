@@ -2,52 +2,99 @@ from flask import Blueprint, render_template, redirect, flash, request, session,
 from app.forms.forms import AssessmentForm
 from app.models.models import Assessment, Faculty
 from app.extensions.db import db
+import logging
 
-assessment_bp = Blueprint('assessment', __name__)
+# Configure logging
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
+
+assessment_bp=Blueprint("assessment",__name__)
 
 @assessment_bp.route('/upload_assessment', methods=['GET', 'POST'])
 def upload_assessment():
+    
     form = AssessmentForm()
 
     if request.method == 'POST':
-        if form.validate_on_submit():  # Validate the form
-            email = session.get('email')  # Retrieve email from the session
-            print(email)
-            faculty = Faculty.query.filter_by(email=email).first()
-            print(faculty)
+        # Validate the form
+        email = session.get('email')  # Retrieve email from the session
+        logger.debug(f"Email from session: {email}")
+        faculty = Faculty.query.filter_by(email=email).first()
+        logger.debug(f"Faculty: {faculty}")
 
-            if faculty:
-                faculty_id = faculty.id
-                course = faculty.course
+        if faculty:
+            faculty_id = faculty.id
+            course = faculty.course
 
-                # Create a new assessment instance and add it to the database
-                assessment = Assessment(
-                    question=form.question.data,
-                    option1=form.option1.data,
-                    option2=form.option2.data,
-                    option3=form.option3.data,
-                    option4=form.option4.data,
-                    correct_answer=form.correct_answer.data,
-                    faculty_id=faculty_id,
-                    course=course  # Associate the assessment with faculty's course
-                )
-                db.session.add(assessment)
-                db.session.commit()
+            # Iterate through each question in the form
+            for i in range(10):  # Assuming up to 10 questions
+                question_key = f'question{i}'
+                option1_key = f'option1{i}'
+                option2_key = f'option2{i}'
+                option3_key = f'option3{i}'
+                option4_key = f'option4{i}'
+                correct_answer_key = f'correct_answer{i}'
 
-                flash('Assessment uploaded successfully!', 'success')
-                return redirect(f"""/{course.lower()}_upload""")
-            else:
-                flash('Faculty not found in the database!', 'error')
-                
+                # Check if the question exists
+                if question_key in request.form:
+                    # Create a new assessment instance for each question and add it to the database
+                    assessment = Assessment(
+                        question=request.form[question_key],
+                        option1=request.form[option1_key],
+                        option2=request.form[option2_key],
+                        option3=request.form[option3_key],
+                        option4=request.form[option4_key],
+                        correct_answer=request.form[correct_answer_key],
+                        faculty_id=faculty_id,
+                        course=course
+                    )
+                    db.session.add(assessment)
+            
+            try:
+                db.session.commit()  # Commit changes after adding all assessments
+            except Exception as e:
+                logger.exception("Error committing assessments to the database.")
+                db.session.rollback()  # Rollback changes if an error occurs
+                flash('An error occurred while uploading assessments. Please try again later.', 'error')
+                return redirect(url_for('/'))  # Redirect to the home page or an error page
+
+            flash('Assessment(s) uploaded successfully!', 'success')
+            return redirect(f"""/{course.lower()}_upload""")
+        else:
+            flash('Faculty not found in the database!', 'error')
+            logger.error("Faculty not found in the database.")
+            return redirect(url_for('/'))  # Redirect to the home page or an error page
+
     return render_template('upload_assessment.html', form=form)
 
 
-@assessment_bp.route('/assessments/<course>',methods=['GET','POST'])
+
+from datetime import datetime, timedelta
+from flask import request, redirect, url_for, flash
+
+@assessment_bp.route('/assessments/<course>', methods=['GET', 'POST'])
 def display_assessments(course):
-    # Query assessments based on the course
-    assessments = Assessment.query.filter_by(course=course).all()
-    # Pass the assessments and their indices to the template, along with the enumerate function
-    return render_template('displayassessments.html', assessments=assessments, index_start=1, enumerate=enumerate)
+    if request.method == 'GET':
+        # Query assessments based on the course
+        assessments = Assessment.query.filter_by(course=course).all()
+        # Pass the assessments and their indices to the template, along with the enumerate function
+        return render_template('displayassessments.html', assessments=assessments, index_start=1, enumerate=enumerate)
+    elif request.method == 'POST':
+        # Handle form submission
+        now = datetime.now()
+        end_time = now + timedelta(minutes=2)  # Assuming 10 minutes time limit
+        submitted_time = datetime.strptime(request.form.get('submitted_time'), '%Y-%m-%d %H:%M:%S')
+        
+        if now <= end_time <= submitted_time:
+            # Process the submitted answers
+            # Here you should handle the submitted answers, calculate scores, etc.
+            flash('Answers submitted successfully!')
+            return redirect('/submit_answers')  # Redirect to assessment results page
+        else:
+            # Submission occurred after the time limit
+            flash('Time limit exceeded! Answers not submitted.')
+            return redirect(url_for('/'))
+
 
 
 
@@ -93,37 +140,12 @@ def delete_question():
         return jsonify({'error': 'Question record not found in the database'}), 404
     
     
-    
-from flask import render_template, request
+
 
 def get_correct_answer(question_id):
     # Query the Assessment table to fetch the correct answer based on the question_id
     question = Assessment.query.get(question_id)
     return question.correct_answer if question else None
-
-def calculate_score(user_answer):
-    score = 0
-
-    for question_id, user_answer in request.form.items():
-        # Get the correct answer for the current question
-        correct_answer = get_correct_answer(question_id)
-
-        # Ensure the correct answer is retrieved and user answer is not None
-        if correct_answer is not None:
-            if user_answer is None:
-                print(f"User has not selected an option for question ID: {question_id}")
-            else:
-                # If correct answer is stored as option number, convert user answer to int
-                if isinstance(correct_answer, int):
-                    user_answer = int(user_answer)
-
-                # Compare user answer with correct answer
-                if user_answer == correct_answer:
-                    score += 1
-
-    return score
-
-
 
 
 from flask import render_template, request
@@ -138,32 +160,27 @@ def submit_answers():
             print(key)
             user_answers=key[1]
             print(user_answers)
-            
 
-        
-        # Debug: Print form data received
-        
-        # Debug: Print processed user answers
         print("Processed user answers:", user_answers)
-
-        # Calculate score based on user answers
-        total_marks = calculate_score(user_answers)
-        print(total_marks)
 
         # Get questions and correct answers from the database
         questions = Assessment.query.all()
 
-        # Prepare results for rendering
         results = []
+        
+        count = 1
         for question in questions:
             selected_option = user_answers  # Get the selected option for the current question
             print(selected_option)
             correct_option = get_correct_answer(question.id)
             is_correct = selected_option == correct_option
-            count=1
-            if selected_option==correct_option:
-                count=count*2
-            total_marks=count
+            for x in selected_option:
+                if x == correct_option:
+                    count = count * 2
+                else:
+                    count = 0  # If selected option is not equal to correct option, set total_marks to 0
+
+            total_marks = count
             print(total_marks)
             
             results.append({
@@ -174,12 +191,10 @@ def submit_answers():
                 'options': [question.option1, question.option2, question.option3, question.option4]
             })
 
-        # Add enumerate to the template context
         template_context = {
             'results': results,
             'total_marks': total_marks,
-            'enumerate': enumerate  # Pass enumerate to the template context
+            'enumerate': enumerate  
         }
 
-        # Render a new HTML page to display the assessment results
         return render_template("assessmentresult.html", **template_context)
