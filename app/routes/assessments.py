@@ -42,7 +42,7 @@ def upload_assessment():
     return render_template('upload_assessment.html', form=form)
 
 
-@assessment_bp.route('/assessments/<course>')
+@assessment_bp.route('/assessments/<course>',methods=['GET','POST'])
 def display_assessments(course):
     # Query assessments based on the course
     assessments = Assessment.query.filter_by(course=course).all()
@@ -91,3 +91,79 @@ def delete_question():
     else:
         # Question record not found in the database
         return jsonify({'error': 'Question record not found in the database'}), 404
+from flask import render_template, request
+
+def get_correct_answer(question_id):
+    # Query the Assessment table to fetch the correct answer based on the question_id
+    question = Assessment.query.get(question_id)
+    return question.correct_answer if question else None
+
+def calculate_score(user_answers):
+    score = 0
+
+    for question_id, user_answer in user_answers.items():
+        # Get the correct answer for the current question
+        correct_answer = get_correct_answer(question_id)
+
+        # Ensure the correct answer is retrieved and user answer is not None
+        if correct_answer is not None:
+            if user_answer is None:
+                print(f"User has not selected an option for question ID: {question_id}")
+            else:
+                # If correct answer is stored as option number, convert user answer to int
+                if isinstance(correct_answer, int):
+                    user_answer = int(user_answer)
+
+                # Compare user answer with correct answer
+                if user_answer == correct_answer:
+                    score += 1
+
+    return score
+
+from flask import render_template, request
+
+@assessment_bp.route('/submit_answers', methods=['POST'])
+def submit_answers():
+    if request.method == 'POST':
+        # Process submitted answers
+        user_answers = {}
+        for key, value in request.form.items():
+            if key.startswith('answer'):
+                question_id = int(key.replace('answer', ''))
+                user_answers[question_id] = int(value)
+        
+        # Debug: Print form data received
+        print("Form data received:", request.form)
+        
+        # Debug: Print processed user answers
+        print("Processed user answers:", user_answers)
+
+        # Calculate score based on user answers
+        total_marks = calculate_score(user_answers)
+
+        # Get questions and correct answers from the database
+        questions = Assessment.query.all()
+
+        # Prepare results for rendering
+        results = []
+        for question in questions:
+            selected_option = user_answers.get(question.id, "User not selected")
+            correct_option = question.correct_answer
+            is_correct = selected_option == correct_option
+            results.append({
+                'question': question.question,
+                'selected_option': selected_option,
+                'correct_option': correct_option,
+                'is_correct': is_correct,
+                'options': [question.option1, question.option2, question.option3, question.option4]
+            })
+
+        # Add enumerate to the template context
+        template_context = {
+            'results': results,
+            'total_marks': total_marks,
+            'enumerate': enumerate  # Pass enumerate to the template context
+        }
+
+        # Render a new HTML page to display the assessment results
+        return render_template("assessmentresult.html", **template_context)

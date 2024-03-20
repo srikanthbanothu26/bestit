@@ -80,6 +80,8 @@ class placement(db.Model):
     company_details=db.Column(db.String(600), nullable=False)   
     last_date_to_apply = db.Column(db.Date, nullable=False)
     course = db.Column(db.String(64), nullable=False)
+    link = db.Column(db.String(400), nullable=False)
+    
     
     def __repr__(self):
         return f"<Placement {self.id}>"

@@ -5,17 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assessments</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto py-8 flex">
         <div class="w-3/4 bg-white rounded-lg shadow-md p-6">
             <h2 id="question-title" class="text-xl font-semibold mb-4"></h2>
-            <ul id="options-list" class="list-disc ml-8"></ul>
+            <ul id="options-list" class="ml-8"></ul>
             <div class="flex justify-between mt-4">
                 <button id="prev-btn" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" onclick="prevQuestion()">Previous</button>
                 <button id="next-btn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="nextQuestion()">Next</button>
             </div>
+            <!-- Changed the onclick event to submit the form instead of using fetch -->
+            <form id="answers-form" action="/submit_answers" method="post" style="display: inline;">
+                <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">Submit Answers</button>
+            </form>
+            
+            <button id="clear-btn" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4" onclick="clearSelection()">Clear Selection</button>
         </div>
         <div class="w-1/4 ml-8">
             <h2 class="text-xl font-bold mb-4">Questions</h2>
@@ -65,6 +70,9 @@
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
 
+        // Array to store selected options
+        const selectedOptions = new Array(questions.length).fill(null);
+
         // Initially display the first question
         let currentQuestionIndex = 0;
         showQuestion(currentQuestionIndex);
@@ -73,9 +81,16 @@
             const question = questions[index];
             questionTitle.textContent = `Question ${index + 1}: ${question.question}`;
             optionsList.innerHTML = '';
-            question.options.forEach(option => {
+            question.options.forEach((option, optionIndex) => {
                 const li = document.createElement('li');
                 li.textContent = option;
+                li.classList.add('cursor-pointer', 'transition', 'duration-300', 'ease-in-out', 'py-2', 'px-4', 'my-2', 'rounded');
+                if (selectedOptions[index] === optionIndex) {
+                    li.classList.add('bg-green-500', 'text-white');
+                } else {
+                    li.classList.add('bg-white', 'text-gray-800', 'hover:bg-gray-200');
+                }
+                li.addEventListener('click', () => selectOption(index, optionIndex));
                 optionsList.appendChild(li);
             });
             // Highlight selected question
@@ -93,6 +108,16 @@
             currentQuestionIndex = index;
         }
 
+        function selectOption(questionIndex, optionIndex) {
+            selectedOptions[questionIndex] = optionIndex;
+            showQuestion(questionIndex);
+        }
+
+        function clearSelection() {
+            selectedOptions[currentQuestionIndex] = null;
+            showQuestion(currentQuestionIndex);
+        }
+
         function prevQuestion() {
             if (currentQuestionIndex > 0) {
                 currentQuestionIndex--;
@@ -106,7 +131,9 @@
                 showQuestion(currentQuestionIndex);
             }
         }
+        
     </script>
+
     <script>
         document.getElementById('upload-btn').addEventListener('click', function() {
             var fileInput = document.getElementById('file-upload');
@@ -144,6 +171,7 @@
             }
         });
     </script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const editBtn = document.getElementById('edit-profile-btn');
@@ -155,6 +183,36 @@
                 uploadBtn.style.display = 'block';
             });
         });
-    </script>   
+    </script> 
+    <script>
+        document.getElementById('answers-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+            
+            // Iterate through questions and update hidden input fields with selected options
+            questions.forEach((question, index) => {
+                const selectedOptionIndex = selectedOptions[index];
+                if (selectedOptionIndex !== null) {
+                    const hiddenInput = document.createElement('input');
+                    hiddenInput.setAttribute('type', 'hidden');
+                    hiddenInput.setAttribute('name', `answer${index + 1}`);
+                    hiddenInput.setAttribute('value', question.options[selectedOptionIndex]);
+                    this.appendChild(hiddenInput);
+                }
+            });
+            
+            // Display prompt message
+            const confirmation = confirm("Are you sure you want to submit?");
+            if (confirmation) {
+                // Submit the form
+                this.submit();
+            } else {
+                // If not confirmed, remove dynamically added hidden input fields
+                document.querySelectorAll('input[type="hidden"]').forEach(element => element.remove());
+                // Do nothing
+                return false;
+            }
+        });
+</script>
+    
 </body>
 </html>

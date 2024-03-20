@@ -140,12 +140,13 @@ def placements():
         company_details = form.placement_company_details.data
         last_date_to_apply = form.last_date_to_apply.data
         course=form.course.data
+        link=form.link.data
         
         # Create a new Placement object
         new_placement = placement(Date=date,course=course,
                                   placement_company_name=company_name,
                                   company_details=company_details,
-                                  last_date_to_apply=last_date_to_apply)
+                                  last_date_to_apply=last_date_to_apply,link=link)
         
         # Add the new placement to the database session
         db.session.add(new_placement)
