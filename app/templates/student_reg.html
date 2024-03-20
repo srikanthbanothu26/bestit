@@ -6,15 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REGISTRATION</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet"  href="static\css\first.css">
 </head>
 <body class="font-sans  flex justify-center h-screen items-center ">
-    <div class=" items-center flex flex-col mt-2 border-2 border-blue-600  bg-green-800">
+    <div class=" items-center flex flex-col mt-2 border-2 border-blue-600  bg-rose-800">
         <div class="x bg-white border border-gray-300 pl-2 pr-2 rounded-lg shadow-md items-center m-4">
             <form method="POST" class="space-y-2" action="/student_registration">
                 <a class="flex justify-end" href="/">BACK</a>
                 {{ form.csrf_token }}
                 <div class="pb-8">
-                    <ul class="text-center text-2xl font-bold">BEST</ul>
+                    <ul class="text-center text-2xl font-bold text-gradient">BEST</ul>
                     <ul class="text-center ">IT ACADEMY</ul>
                 </div>
                 <div class="grid justify-center">
@@ -42,7 +43,7 @@
                         {{ form.course(class="w-full p-2 rounded border-2  col-span-2 border-gray-300") }}
                     </div>
                     <div class="flex justify-center ">
-                        <button type="submit" class="bg-rose-600 text-white rounded hover:bg-green-600 mb-2">SIGN-UP</button>
+                        <button type="submit" class="bg-rose-600 text-white rounded hover:bg-green-600 mb-2 p-2">SIGN-UP</button>
                     </div>
                 </div>
             </form>

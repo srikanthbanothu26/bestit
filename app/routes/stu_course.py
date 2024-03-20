@@ -1,6 +1,5 @@
-from flask import flash, session, redirect, render_template, Blueprint, current_app,send_from_directory,Response
+from flask import flash, session, redirect, render_template, Blueprint, current_app
 import os
-from app.oper.oper import get_user_course
 from flask_wtf.csrf import generate_csrf
 from flask_login import login_required
 from app.models.models import placement
@@ -61,10 +60,11 @@ def java_course():
     file_recordings = os.listdir(upload_folders.get('recordings', ''))
     file_assignments = os.listdir(upload_folders.get('assignments', ''))
     file_assessments = os.listdir(upload_folders.get('assessments', ''))
+    java_course_placements = placement.query.filter_by(course='java').all()
     
     return render_template("java_course.html", username=username, course=course, 
                            file_notes=file_notes, file_recordings=file_recordings, 
-                           file_assignments=file_assignments, file_assessments=file_assessments, csrf_token=csrf_token)
+                           file_assignments=file_assignments, file_assessments=file_assessments, csrf_token=csrf_token,java_course_placements=java_course_placements)
 
 @course_bp.route("/digitalmarketing_course", methods=["GET", "POST"])
 def DM_course():
@@ -89,10 +89,11 @@ def DM_course():
     file_recordings = os.listdir(upload_folders.get('recordings', ''))
     file_assignments = os.listdir(upload_folders.get('assignments', ''))
     file_assessments = os.listdir(upload_folders.get('assessments', ''))
+    digitalmarketing_course_placements = placement.query.filter_by(course='digitalmarketing').all()
     
     return render_template("DM_course.html", username=username, course=course, 
                            file_notes=file_notes, file_recordings=file_recordings, 
-                           file_assignments=file_assignments, file_assessments=file_assessments, csrf_token=csrf_token)
+                           file_assignments=file_assignments, file_assessments=file_assessments, csrf_token=csrf_token,digitalmarketing_course_placements=digitalmarketing_course_placements)
     
     
     
@@ -120,10 +121,11 @@ def TT_course():
     file_recordings = os.listdir(upload_folders.get('recordings', ''))
     file_assignments = os.listdir(upload_folders.get('assignments', ''))
     file_assessments = os.listdir(upload_folders.get('assessments', ''))
+    testingtools_course_placements = placement.query.filter_by(course='testingtools').all()
     
     return render_template("TT_course.html", username=username, course=course, 
                            file_notes=file_notes, file_recordings=file_recordings, 
-                           file_assignments=file_assignments, file_assessments=file_assessments, csrf_token=csrf_token)
+                           file_assignments=file_assignments, file_assessments=file_assessments, csrf_token=csrf_token,testingtools_course_placements=testingtools_course_placements)
     
     
 
