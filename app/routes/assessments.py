@@ -91,6 +91,9 @@ def delete_question():
     else:
         # Question record not found in the database
         return jsonify({'error': 'Question record not found in the database'}), 404
+    
+    
+    
 from flask import render_template, request
 
 def get_correct_answer(question_id):
@@ -98,10 +101,10 @@ def get_correct_answer(question_id):
     question = Assessment.query.get(question_id)
     return question.correct_answer if question else None
 
-def calculate_score(user_answers):
+def calculate_score(user_answer):
     score = 0
 
-    for question_id, user_answer in user_answers.items():
+    for question_id, user_answer in request.form.items():
         # Get the correct answer for the current question
         correct_answer = get_correct_answer(question_id)
 
@@ -120,26 +123,32 @@ def calculate_score(user_answers):
 
     return score
 
+
+
+
 from flask import render_template, request
 
 @assessment_bp.route('/submit_answers', methods=['POST'])
 def submit_answers():
     if request.method == 'POST':
         # Process submitted answers
+        print("Form data received:", request.form)
         user_answers = {}
-        for key, value in request.form.items():
-            if key.startswith('answer'):
-                question_id = int(key.replace('answer', ''))
-                user_answers[question_id] = int(value)
+        for key in request.form.items():
+            print(key)
+            user_answers=key[1]
+            print(user_answers)
+            
+
         
         # Debug: Print form data received
-        print("Form data received:", request.form)
         
         # Debug: Print processed user answers
         print("Processed user answers:", user_answers)
 
         # Calculate score based on user answers
         total_marks = calculate_score(user_answers)
+        print(total_marks)
 
         # Get questions and correct answers from the database
         questions = Assessment.query.all()
@@ -147,9 +156,16 @@ def submit_answers():
         # Prepare results for rendering
         results = []
         for question in questions:
-            selected_option = user_answers.get(question.id, "User not selected")
-            correct_option = question.correct_answer
+            selected_option = user_answers  # Get the selected option for the current question
+            print(selected_option)
+            correct_option = get_correct_answer(question.id)
             is_correct = selected_option == correct_option
+            count=1
+            if selected_option==correct_option:
+                count=count*2
+            total_marks=count
+            print(total_marks)
+            
             results.append({
                 'question': question.question,
                 'selected_option': selected_option,

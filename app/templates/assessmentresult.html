@@ -9,28 +9,36 @@
 <body class="bg-gray-100">
     <div class="container mx-auto py-8">
         <h1 class="text-3xl font-bold mb-4">Assessment Results</h1>
-        
+        <p class="text-2xl mt-8 font-bold text-right">Total Marks: {{ total_marks }}</p>
+        <div class="grid justify-end">
+            <a href="/" class="text-blue-500 mt-4">Back to Homepage</a>  
+        </div>
         <div class="flex flex-col space-y-4">
             {% for result in results %}
             <div class="border p-4 rounded-lg shadow-md">
                 <div class="flex justify-between">
                     <p class="text-lg font-semibold">{{ result.question }}</p>
-                    {% if  not result.is_correct %}
+                    {% if  result.is_correct %}
                     <p class="text-green-500 font-semibold">(Correct: {{result.correct_option }})</p>
                     {% endif %}
                 </div>
                 <ul class="list-disc ml-8">
                     {% for option_index, option in enumerate(result.options) %}
-                    <li class="{% if result.selected_option == option_index %}{{ 'bg-green-500' if result.is_correct else 'bg-red-500' }} text-white font-bold{% else %}text-gray-800{% endif %}">
-                        {{ option }}
-                    </li>
+                        <li class="{% if option == result.selected_option %} 
+                                        {% if option == result.correct_option %}
+                                            bg-green-500 text-white font-bold
+                                        {% else %}
+                                            bg-red-500 text-white font-bold
+                                        {% endif %}
+                                    {% endif %} py-2 px-4 rounded-md">
+                            {{ option }}                  
+                        </li>
                     {% endfor %}
                 </ul>
+                
             </div>
             {% endfor %}
         </div>
-        <p class="text-2xl mt-8 font-bold">Total Marks: {{ total_marks }}</p>
-        <a href="/" class="text-blue-500 mt-4">Back to Homepage</a>
     </div>
 </body>
 </html>
