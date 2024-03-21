@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python Course</title>
+    <title>tt Course</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet"  href="static\css\first.css">
@@ -16,7 +16,7 @@
                 <a href="" class="text-2xl text-gradient">B E S T</a>
                 <a href="" class="">IT Academy</a>
             </ul>
-            <div class="flex  text-green-500  items-center gap-6"> 
+            <div class="flex  text-green-500  items-center gap-6 mr-10"> 
                 <button class="bg-green-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg w-full focus:outline-none" onclick="scrollToSection('placements')">PLACEMENTS</button>      
                 <button class="bg-green-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg w-full focus:outline-none" onclick="scrollToSection('notes')">NOTES</button>
                 <button class="bg-green-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg w-full focus:outline-none" onclick="scrollToSection('recordings')">RECORDINGS</button>               
@@ -51,21 +51,21 @@
                 <table class="text-black border-collapse w-full">
                     <thead>
                         <tr>
-                            <th class="border border-gray-300 px-4 py-2">Date</th>
-                            <th class="border border-gray-300 px-4 py-2">Company Name</th>
-                            <th class="border border-gray-300 px-4 py-2">Company Details</th>
-                            <th class="border border-gray-300 px-4 py-2">Last Date to Apply</th>
-                            <th class="border border-gray-300 px-4 py-2">Apply</th>
+                            <th class="border border-gray-600 px-4 py-2">Date</th>
+                            <th class="border border-gray-600 px-4 py-2">Company Name</th>
+                            <th class="border border-gray-600 px-4 py-2">Company Details</th>
+                            <th class="border border-gray-600 px-4 py-2">Last Date to Apply</th>
+                            <th class="border border-gray-600 px-4 py-2">Apply</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for placement in testingtools_course_placements %}
                         <tr>
-                            <td class="border border-gray-300 px-4 py-2">{{ placement.Date }}</td>
-                            <td class="border border-gray-300 px-4 py-2">{{ placement.placement_company_name }}</td>
-                            <td class="border border-gray-300 px-4 py-2">{{ placement.company_details }}</td>
-                            <td class="border border-gray-300 px-4 py-2">{{ placement.last_date_to_apply }}</td>
-                            <td class="border border-gray-300 px-4 py-2"><a href={{ placement.link }}>{{ placement.link }}</a></td>
+                            <td class="border border-gray-600 px-2 py-2">{{ placement.Date }}</td>
+                            <td class="border border-gray-600 px-2 py-2">{{ placement.placement_company_name }}</td>
+                            <td class="border border-gray-600 px-2 py-2">{{ placement.company_details }}</td>
+                            <td class="border border-gray-600 px-2 py-2">{{ placement.last_date_to_apply }}</td>
+                            <td class="border border-gray-600 px-2 py-2  text-red-600"><a class=""  href={{ placement.link }}>{{ placement.link }}</a></td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -88,8 +88,6 @@
                     {% endfor %}
                 </ul>                                                                
             </div>
-            
-
             <div class="bg-blue-800 text-white p-6 rounded-lg mb-6 overflow-y-scroll h-full text-center" id="recordings">              
                 <h1 class="text-2xl font-bold mb-4">RECORDINGS</h1>
                 <ul>
@@ -106,8 +104,7 @@
                     </li>
                     {% endfor %}
                 </ul>                                                                
-            </div>
-            
+            </div>        
             <div class="bg-blue-800 text-white p-6 rounded-lg mb-6 overflow-y-scroll h-full text-center" id="assignments">              
                 <h1 class="text-2xl font-bold mb-4">ASSIGNMENTS</h1>
                 <ul>
@@ -141,10 +138,8 @@
                     </li>
                     {% endfor %}
                 </ul>
-                <a id="assessmentLink" href="/assessments/{{ current_user.course }}" class="btn-link">View Assessments</a>
-                                                                
-            </div>
-           
+                <a id="assessmentLink" href="/assessments/{{ current_user.course }}" class="btn-link">View Assessments</a>                                                              
+            </div>    
         </div>
     </div>
     <script>

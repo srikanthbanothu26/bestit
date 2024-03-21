@@ -1,38 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faculty  Form</title>
+    <title>Faculty Form</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-r from-red-500 to-blue-500 grid place-items-center justify-center h-screen" >
-    <div class="flex justify-end w-full">
-        <a href="/" class="text-white ">BACK</a> 
-    </div>
-    <div class="bg-white p-8 shadow-md w-72 h-80">
-        <div class="flex flex-row rounded-full w-48">
-            <div>
-                <img src="\static\images\Picture2.png" class="h-16">
-            </div>
-            <ul class="flex flex-col text-xl">
-                <b class="ml-2 text-2xl">B E S T</b>
-                <b class="">IT Academy</b>
-            </ul> 
+
+<body class="bg-black flex flex-col justify-center items-center h-screen">
+    <a href="/" class="bg-rose-600 border-2 p-2 rounded-lg hover:text-gray-800 transition duration-300 self-end mr-4 mt-4">BACK</a>
+    <div class="bg-gray-800 p-8 shadow-md rounded-lg w-72 h-80 flex flex-col justify-center items-center">
+        <div class="flex flex-col items-center justify-center mb-8">
+            <h1 class="text-3xl font-bold">B E S T</h1>
+            <h2 class="text-xl font-semibold">IT Academy</h2>
         </div>
-        <div class="grid grid-cols-2 gap-10 pt-24">
-            <form method="POST" action="/faculty_reg">
-                <button type="action" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        <div class="grid grid-cols-2 gap-6">
+            <form method="POST" action="/faculty_reg" class="flex justify-center items-center">
+                <button type="action" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline transform hover:scale-105 transition duration-300">
                     Register
                 </button>
             </form>
-            <form method="POST" action="/faculty_login">
-                    <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                        Login
-                    </button>
-                </form>
-            </div>
-        </div> 
-    </div>   
+            <form method="POST" action="/faculty_login" class="flex justify-center items-center">
+                <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline transform hover:scale-105 transition duration-300">
+                    Login
+                </button>
+            </form>
+        </div>
+    </div>
 </body>
+
 </html>

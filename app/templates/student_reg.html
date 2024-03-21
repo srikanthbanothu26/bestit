@@ -8,9 +8,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet"  href="static\css\first.css">
 </head>
-<body class="font-sans  flex justify-center h-screen items-center ">
-    <div class=" items-center flex flex-col mt-2 border-2 border-blue-600  bg-rose-800">
-        <div class="x bg-white border border-gray-300 pl-2 pr-2 rounded-lg shadow-md items-center m-4">
+<body class="bg-black font-sans  flex justify-center h-screen items-center ">
+    <div class=" items-center flex flex-col mt-2 border-2 border-blue-600 ">
+        <div class="x bg-gray-600 border border-gray-300 pl-2 pr-2 rounded-lg shadow-md items-center m-4">
             <form method="POST" class="space-y-2" action="/student_registration">
                 <a class="flex justify-end" href="/">BACK</a>
                 {{ form.csrf_token }}

@@ -1,28 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Page</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-black">
-    <div class="text-white grid place-items-center justify-center mt-10">
-        <a class="bg-green-600 border-2 rounded-lg p-4 " href="/placements">tap to add placements</a>
-    </div>
-    <div class="flex flex-col items-center h-96 bg-green-600 rounded-lg mt-10">
-        {% for x in new_placement%}
-            <div class="flex-row flex justify-center gap-4 h-10">
-                <p class="text-white">{{x.id }}</p>
-                <p class="text-white">Date: {{x.Date }}</p>
-                <p class="text-white">Company Name: {{ x.placement_company_name }}</p>
-                <p class="text-white">Company Details: {{ x.company_details }}</p>
-                <p class="text-white">Last Date to Apply: {{ x.last_date_to_apply }}</p>
-                <p class="text-white">course: {{ x.course }}</p>
-                <a  href={{ x.link }} class="text-white">{{x.link}} </a>
-            </div>
-        {% endfor %}
-    </div>
 
+<body class="bg-gradient-to-br from-purple-900 to-indigo-800 text-white font-sans">
+    <div class="flex justify-end mr-6 mt-6">
+        <a href="/" class='border-2 p-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-300'>Logout</a>
+    </div>
+    <div class="container mx-auto py-10">
+        <div class="text-center mb-10">
+            <h1 class="text-3xl font-bold">Admin Dashboard</h1>
+            <p class="mt-2 text-gray-400">Welcome, Admin!</p>
+        </div>   
+        <!-- Button to add placements -->
+        <div class="text-center">
+            <a href="/placements" class="inline-block px-6 py-3 bg-green-500 text-white font-semibold rounded-lg shadow-lg hover:bg-green-600 transition duration-300 transform hover:translate-y-1">Add Placements</a>
+        </div>
+
+        <!-- Placements list -->
+        <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-white">
+            {% for placement in new_placement %}
+            <div class="bg-gradient-to-br from-pink-600 to-purple-600 rounded-lg shadow-lg p-6 transform hover:scale-105 transition duration-300">
+                <p class="text-lg font-semibold mb-4">Placement ID: {{ placement.id }}</p>
+                <p class="text-gray-300 mb-2">Date: {{ placement.Date }}</p>
+                <p class="text-gray-300 mb-2">Company Name: {{ placement.placement_company_name }}</p>
+                <p class="text-gray-300 mb-2">Company Details: {{ placement.company_details }}</p>
+                <p class="text-gray-300 mb-2">Last Date to Apply: {{ placement.last_date_to_apply }}</p>
+                <p class="text-gray-300 mb-2">Course: {{ placement.course }}</p>
+                <a href="{{ placement.link }}" class="text-blue-400 hover:text-blue-300 transition duration-300">{{ placement.link }}</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </body>
+
 </html>

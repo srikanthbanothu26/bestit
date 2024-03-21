@@ -9,28 +9,33 @@
 <body class="bg-gray-100">
     <div class="container mx-auto py-8">
         <h1 class="text-3xl font-bold mb-4">Assessment Results</h1>
-        <p class="text-2xl mt-8 font-bold text-right">Total Marks: {{ total_marks }}</p>
         <div class="grid justify-end">
             <a href="/" class="text-blue-500 mt-4">Back to Homepage</a>  
         </div>
+        <p class="text-2xl mt-8 font-bold text-right">Total Marks: {{ total_marks }}</p> 
         <div class="flex flex-col space-y-4">
             {% for result in results %}
             <div class="border p-4 rounded-lg shadow-md">
                 <div class="flex justify-between">
                     <p class="text-lg font-semibold">{{ result.question }}</p>
-                    {% if  result.is_correct %}
-                    <p class="text-green-500 font-semibold">(Correct: {{result.correct_option }})</p>
-                    {% endif %}
+                    <p class="text-lg font-semibold">
+                        {% if result.correct_option in result.selected_option %}
+                            (Correct)
+                        {% else %}
+                            (Incorrect)
+                        {% endif %}
+                    </p>
                 </div>
-                <ul class="list-decimal  ml-8" type="1">
-                    {% for option_index, option in enumerate(result.options) %}
-                        <li class="{% if option == result.selected_option %} 
-                                        {% if option == result.correct_option %}
-                                            bg-green-500  font-bold
-                                        {% else %}
-                                            bg-red-500 font-bold
-                                        {% endif %}
-                                    {% endif %} py-2 px-4 rounded-md">
+                <ul class="list-decimal ml-8" type="1">
+                    {% for option in result.options %}
+                        <li class="{% if option in result.selected_option %}
+                                    {% if option == result.correct_option %}
+                                        bg-green-500 font-bold
+                                    {% else %}
+                                        bg-red-500 font-bold
+                                    {% endif %}
+                                {% endif %}
+                                py-2 px-4 rounded-md">
                             {{ option }}                  
                         </li>
                     {% endfor %}
@@ -40,7 +45,7 @@
         </div>
     </div>
     <script>
-                // Prevent navigating away from the page
+        // Prevent navigating away from the page
         window.onload = function() {
             window.addEventListener("beforeunload", function(e) {
                 // Cancel the event
@@ -60,7 +65,6 @@
                 history.pushState(null, null, document.URL);
             });
         };
-
     </script>
 </body>
 </html>

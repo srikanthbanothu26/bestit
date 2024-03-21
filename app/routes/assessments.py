@@ -89,14 +89,11 @@ def display_assessments(course):
             # Process the submitted answers
             # Here you should handle the submitted answers, calculate scores, etc.
             flash('Answers submitted successfully!')
-            return redirect('/submit_answers')  # Redirect to assessment results page
+            return redirect('/submit_answers/<course>')  # Redirect to assessment results page
         else:
             # Submission occurred after the time limit
             flash('Time limit exceeded! Answers not submitted.')
             return redirect(url_for('/'))
-
-
-
 
 
 @assessment_bp.route('/uploaded_questions/<int:faculty_id>', methods=['GET'])
@@ -139,62 +136,46 @@ def delete_question():
         # Question record not found in the database
         return jsonify({'error': 'Question record not found in the database'}), 404
     
-    
-
-
-def get_correct_answer(question_id):
-    # Query the Assessment table to fetch the correct answer based on the question_id
-    question = Assessment.query.get(question_id)
-    return question.correct_answer if question else None
-
 
 from flask import render_template, request
-
-@assessment_bp.route('/submit_answers', methods=['POST'])
-def submit_answers():
+@assessment_bp.route('/submit_answers/<course>', methods=['POST'])
+def submit_answers(course):
     if request.method == 'POST':
         # Process submitted answers
         print("Form data received:", request.form)
-        user_answers = {}
-        for key in request.form.items():
-            print(key)
-            user_answers=key[1]
-            print(user_answers)
+        user_answers = {}  # Initialize an empty dictionary to store user answers
+        for key, value in request.form.items():
+            if key.startswith('answer'):
+                question_id = key.split('answer')[1]  # Extract question ID from form field name
+                user_answers[question_id] = value  # Store answer with question ID
 
         print("Processed user answers:", user_answers)
 
         # Get questions and correct answers from the database
-        questions = Assessment.query.all()
+        questions = Assessment.query.filter_by(course=course).all()
 
         results = []
+        total_marks = 1
         
-        count = 1
         for question in questions:
-            selected_option = user_answers  # Get the selected option for the current question
+            selected_option = user_answers.values()  # Get the selected option for the current question
             print(selected_option)
-            correct_option = get_correct_answer(question.id)
-            is_correct = selected_option == correct_option
+            correct_option = question.correct_answer
+            
             for x in selected_option:
                 if x == correct_option:
-                    count = count * 2
-                else:
-                    count = 0  # If selected option is not equal to correct option, set total_marks to 0
-
-            total_marks = count
-            print(total_marks)
-            
+                    total_marks =total_marks*2      
             results.append({
                 'question': question.question,
                 'selected_option': selected_option,
                 'correct_option': correct_option,
-                'is_correct': is_correct,
                 'options': [question.option1, question.option2, question.option3, question.option4]
             })
 
-        template_context = {
-            'results': results,
-            'total_marks': total_marks,
-            'enumerate': enumerate  
-        }
+            template_context = {
+                'results': results,
+                'total_marks': total_marks,
+                'enumerate': enumerate  
+            }
 
         return render_template("assessmentresult.html", **template_context)

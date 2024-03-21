@@ -19,10 +19,9 @@
                 <button id="prev-btn" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" onclick="prevQuestion()">Previous</button>
                 <button id="next-btn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="nextQuestion()">Next</button>
             </div>
-            <!-- Changed the onclick event to submit the form instead of using fetch -->
-            <form id="answers-form" action="/submit_answers" method="post" style="display: inline;">
+            <form id="answers-form" action="/submit_answers/{{ current_user.course }}" method="post" style="display: inline;">
                 <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">Submit Answers</button>
-            </form>
+            </form>            
             
             <button id="clear-btn" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4" onclick="clearSelection()">Clear Selection</button>
         </div>
