@@ -50,7 +50,7 @@
             <form action="/upload_assessment" method="POST">
                 {{ form.csrf_token }}
                 <!-- Loop to create 10 sets of inputs for each assessment -->
-                {% for i in range(2) %}
+                {% for i in range(10) %}
                 <div class="border border-gray-700 rounded-lg p-6 mb-6">
                     <h2 class="text-xl font-semibold mb-4">Question {{ i + 1 }}</h2>
                     <input type="text" name="question{{ i }}" class="text-black question-input w-full mb-4" placeholder="Type your question..." required>
