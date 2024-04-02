@@ -1,6 +1,7 @@
-from flask import Blueprint, render_template, session, redirect, request, flash
+from flask import Blueprint, render_template, session, redirect, request, flash,jsonify
 from flask_login import login_required
 from app.models.models import placement
+from app.extensions.db import db
 
 main_bp = Blueprint("main", __name__)
 
@@ -57,3 +58,17 @@ def admin():
     new_placement = placement.query.all()
     
     return render_template('admin.html', new_placement=new_placement)
+
+
+from flask import url_for
+
+@main_bp.route('/delete_placement/<int:placement_id>', methods=['GET','POST'])
+def delete_placement(placement_id):
+    placement_to_delete = placement.query.get(placement_id)
+
+    if placement_to_delete:
+        db.session.delete(placement_to_delete)
+        db.session.commit()
+        return redirect('/admin') # Redirect to the admin page after deletion
+    else:
+        return jsonify({"error": "Placement not found"}), 404

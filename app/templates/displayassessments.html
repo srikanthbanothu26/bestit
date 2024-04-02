@@ -33,23 +33,25 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="bg-black text-white h-96 w-60 grid grid-cols-1 justify-center items-center rounded-md">
-            <div class="pl-8 pr-8">
-                <div class="profile-image-container justify-center">
+        <div class="bg-black text-white h-96 w-96 grid grid-cols-1 justify-center items-center rounded-md p-10">
+            <div class="grid grid-cols-1">
+                <p>id:{{current_user.id}}</p>
+                <div class="profile-image-container justify-center flex">
                     {% if current_user.profile_image %}
                     <img id="profile-image" src="{{ url_for('static', filename='profile_pics/' + current_user.profile_image) }}" class="h-24 w-24 rounded-full" alt="{{ current_user.username }}'s Profile Image" onerror="this.onerror=null;this.src='{{ url_for('static', filename='profile_pics/profile.png') }}';" />
                     {% else %}
                     <img id="profile-image" src="{{ url_for('static', filename='profile_pics/default.png') }}" class="h-16 w-16 rounded-full" alt="Default Profile Image">
                     {% endif %}
                 </div>
-                <button id="edit-profile-btn" class="ml-20 border-2 flex inline text-white rounded h-8 w-16">Update</button>
+                <!--<button id="edit-profile-btn" class="ml-20 border-2 flex inline text-white rounded h-8 w-16">Update</button>
                 <input type="file" id="file-upload" accept="image/*" style="display: none;">
-                <button id="upload-btn" style="display: none;" class="bg-green-600">Upload</button>
-                <p class="mt-8">name:{{current_user.username}}<p>
-                <p>id:{{current_user.id}}</p>
-                <p class="flex justify-center">email:{{current_user.email}}</p>
-                <p class="mb-10">course:{{current_user.course}}</p>
-                <a href="/" class="border border-white py-1 px-3 rounded-lg mt-8">LOGOUT</a>
+                <button id="upload-btn" style="display: none;" class="bg-green-600">Upload</button>-->
+                <div class="grid grid-cols-1 mt-8">
+                    <p class="">name:<b class="ml-2">{{current_user.username}}</b><p>
+                    <p class="">email:<b class="ml-2">{{current_user.email}}</b></p>
+                    <p class="">course:<b class="ml-2">{{current_user.course}}</b></p>
+                </div>
+                <a href="/" class="border border-white py-1 px-3 rounded-lg mt-8 bg-rose-600 justify-center flex hover:bg-green-600">LOGOUT</a>
             </div>
         </div>
     </div>

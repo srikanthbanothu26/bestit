@@ -24,8 +24,9 @@
                 <button class="bg-green-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg w-full focus:outline-none" onclick="scrollToSection('assessments')">ASSESSMENTS</button>          
             </div>     
         </div>
-        <div class="bg-red-700 h-96 w-70 grid grid-cols-1 justify-center items-center rounded-md">
-            <div class="pl-8 pr-8">
+        <div class="bg-rose-800 h-96 w-70 grid grid-cols-1 justify-center items-center rounded-md cursor-pointer p-10">
+            <div class="grid grid-cols-1 justify-center">
+                <p >id:{{current_user.id}}</p>
                 <div class="profile-image-container ml-16">
                     {% if current_user.profile_image %}
                     <img id="profile-image" src="{{ url_for('static', filename='profile_pics/' + current_user.profile_image) }}" class="h-24 w-24 rounded-full" alt="{{ current_user.username }}'s Profile Image" onerror="this.onerror=null;this.src='{{ url_for('static', filename='profile_pics/profile.png') }}';" />
@@ -36,11 +37,12 @@
                 <button id="edit-profile-btn" class="ml-20 border-2 flex inline text-white rounded h-8 w-16">Update</button>
                 <input type="file" id="file-upload" accept="image/*" style="display: none;">
                 <button id="upload-btn" style="display: none;" class="bg-green-600">Upload</button>
-                <p class="mt-8">name:{{current_user.username}}<p>
-                <p>id:{{current_user.id}}</p>
-                <p class="pr-10">email:{{current_user.email}}</p>
-                <p class="mb-10">course:{{current_user.course}}</p>
-                <a href="/" class="border border-white py-1 px-3 rounded-lg mt-8">LOGOUT</a>
+                <div class="grid grid-cols-1 mt-8 gap-2 mb-4">
+                    <p class="hover:translate-x-2 hover:translate-y-2 hover:text-2xl hover:-translate-x-2 hover:-translate-x-2" >name:<b class="ml-2">{{current_user.username}}</b><p>
+                    <p class="pr-10">email:<b class="ml-2">{{current_user.email}}</b></p>
+                    <p class="">course:<b class="ml-2">{{current_user.course}}</b></p>
+                </div>
+                <a href="/" class="border border-white py-1 px-3 rounded-lg flex justify-center bg-green-600 hover:bg-red-200">LOGOUT</a>
             </div>
         </div>   
     </div>
