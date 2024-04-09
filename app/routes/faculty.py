@@ -38,7 +38,7 @@ def faculty_login():
         
         faculty = Faculty.query.filter_by(email=email).first()
         print(faculty)
-        if faculty and bcrypt.check_password_hash(faculty.password_hash, password) and course1==course2:
+        if faculty and bcrypt.check_password_hash(faculty.password_hash, password) and course1==course2 and course1==faculty.course:
             flash("Login successful.")
             session['email'] = faculty.email
             session['course'] = faculty.course

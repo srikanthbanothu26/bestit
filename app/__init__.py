@@ -1,5 +1,5 @@
 # app/__init__.py
-from flask import Flask
+from flask import Flask,current_app
 from app.extensions.db import db
 from app.configure import Config
 from app.extensions.login_manager import login_manager

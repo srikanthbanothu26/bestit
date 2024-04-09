@@ -68,3 +68,4 @@ class PlacementForm(FlaskForm):
     course = SelectField('Choose Course', choices=[('python', 'Python'),('java', 'Java'),('testingtools','testingtools'),('digitalmarketing','digitalmarketing')], validators=[InputRequired()])
     link= StringField('apply link', validators=[DataRequired()])
     submit = SubmitField('Upload')
+

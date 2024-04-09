@@ -85,3 +85,12 @@ class placement(db.Model):
     
     def __repr__(self):
         return f"<Placement {self.id}>"
+    
+    
+class Image(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    filename = db.Column(db.String(255))
+    filepath = db.Column(db.String(255))
+    
+    def __repr__(self):
+        return f"<Image id={self.id}, filename={self.filename}, filepath={self.filepath}>"

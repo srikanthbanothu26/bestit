@@ -3,65 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokemon</title>
+    <title>Pics</title>
     <link rel="icon" href="static\img\Screenshot 2024-02-27 at 11-01-46 Colors LOGO.com1.ico">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="static\css\pics.css">
 </head>
-<body class="text-white bg-black cursor-pointer">
-    <div class="relative m-0 p-0 cursor-pointer grid-cols-4 grid">
-        <div class="image-container flex flex-row h-96 w-96 object-cover">
-            <!-- Replace the image URL with your actual image URL -->
-            <img class="image  object-cover" src="https://getwallpapers.com/wallpaper/full/3/7/4/8699.jpg" alt="Image 1">
-            <img class="image hidden object-cover rounded-lg " src="https://getwallpapers.com/wallpaper/full/a/1/d/47944.jpg" alt="Image 2">
-            <img class="image hidden object-cover " src="https://getwallpapers.com/wallpaper/full/c/4/7/525488.jpg" alt="Image 3">
-            <img class="image hidden  object-cover" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhDdSMyoOGmnXq-2HU-LPhGQZ4dOKY9nZbss0tDlgAXbxZAH-XLYaL4nZeYdC0FsiOP7b-zYubZTg6HD6uGJp52L2jVNRPAoWCfNGjCip-FGKkNADglWO9mIAr6MkhaOA5z5N-TzSj5k3V2fFceKs1-FNXTgnBYj3ONVE8aY94kYZVE5-I1EJRMaMyY/s1920/charizard.jpg" alt="Image 4">
-            <img class="image hidden object-cover" src="https://getwallpapers.com/wallpaper/full/0/8/2/53557.jpg" alt="Image 5">
-            <!-- Buttons corresponding to each image -->
-            <div class="button-container absolute bottom-0 flex justify-center">
-                <div class="button mx-1" onclick="showImage(1)"></div>
-                <div class="button mx-1" onclick="showImage(2)"></div>
-                <div class="button mx-1" onclick="showImage(3)"></div>
-                <div class="button mx-1" onclick="showImage(4)"></div>
-                <div class="button mx-1" onclick="showImage(5)"></div>
-            </div>
+<body class='h-full w-full'>
+    <div class="flex justify-end w-full">
+        <a class="border-4 rounded-lg bg-green-600 px-4 py-2" href="/">back</a> 
+    </div>   
+    <div class="grid grid-cols-5 gap-10">  
+        {% for image in uploaded_images %} 
+        <div class="grid grid-cols-1 gap-4  border-2">
+            <img src="static/uploadingpics/{{image.filename}}" alt="{{ image.filename }}" class="h-70 w-60">
         </div>
-        <div>
-        </div>
-        <div>
-        </div>
-    </div>
-    <script>
-        // JavaScript function to display the selected image
-        function showImage(imageNumber) {
-            const images = document.querySelectorAll('.image');
-            images.forEach((image, index) => {
-                image.classList.add('hidden');
-            });
-            images[imageNumber - 1].classList.remove('hidden');
-        }
-    </script>
-    <script>
-        // Function to toggle animation classes
-        function animateItems() {
-            listItems.forEach((item, index) => {
-                // Toggle the classes based on the index
-                if (index % 2 === 0) {
-                    item.classList.add('animate-top-to-bottom');
-                    item.classList.remove('animate-bottom-to-top');
-                } else {
-                    item.classList.add('animate-bottom-to-top');
-                    item.classList.remove('animate-top-to-bottom');
-                }
-            });
-        }
-
-        // Call the function initially
-        animateItems();
-
-        // Set interval to continuously toggle animation classes
-        setInterval(animateItems, 3000); // Change the interval time as needed
-
-    </script>
+        {% endfor %}  
+    </div>     
 </body>
 </html>
