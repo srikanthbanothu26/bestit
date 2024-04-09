@@ -32,10 +32,11 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
 .container_1{
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .container_1:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    padding: 4px;
 }
