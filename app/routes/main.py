@@ -92,7 +92,6 @@ def tt_info():
 @main_bp.route("/admin",methods=['get','post'])
 def admin():
 
-        # Fetch the placement object from the database
     new_placement = placement.query.all()
     
     return render_template('admin.html', new_placement=new_placement)
