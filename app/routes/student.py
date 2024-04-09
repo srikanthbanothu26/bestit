@@ -55,8 +55,9 @@ def login():
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
+        course=form.course.data
         user = User.query.filter_by(username=username).first()
-        if user and bcrypt.check_password_hash(user.password_hash, password):
+        if user and bcrypt.check_password_hash(user.password_hash, password) and course==user.course:
             login_user(user)
             session['username'] =user.username  # Store username in session
             session['course'] =user.course  # Store user course in session
